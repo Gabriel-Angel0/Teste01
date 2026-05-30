@@ -18,32 +18,68 @@ const db = getFirestore(app);
 
 const cadastroForm = document.getElementById('form-cadastro');
 const loginForm = document.getElementById('form-login');
+const situacaoSelect = document.getElementById('situacao');
+const campoAnoConclusao = document.getElementById('campo-ano-conclusao');
+
+if (situacaoSelect && campoAnoConclusao) {
+  situacaoSelect.addEventListener('change', () => {
+    const anoConclusaoInput = cadastroForm?.anoConclusao;
+
+    if (situacaoSelect.value === 'concluido') {
+      campoAnoConclusao.style.display = 'block';
+      if (anoConclusaoInput) anoConclusaoInput.required = true;
+    } else {
+      campoAnoConclusao.style.display = 'none';
+      if (anoConclusaoInput) {
+        anoConclusaoInput.required = false;
+        anoConclusaoInput.value = '';
+      }
+    }
+  });
+}
 
 if (cadastroForm) {
   cadastroForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const nome = cadastroForm.nome.value;
-    const email = cadastroForm.email.value;
-    const curso = cadastroForm.curso.value;
-    const ano = cadastroForm.ano.value;
+    const mensagem = document.getElementById('mensagem');
+    mensagem.textContent = 'Enviando cadastro...';
+
+    const dados = {
+      nome: cadastroForm.nome.value.trim(),
+      email: cadastroForm.email.value.trim(),
+      matricula: cadastroForm.matricula.value.trim(),
+      curso: cadastroForm.curso.value.trim(),
+      anoIngresso: Number(cadastroForm.anoIngresso.value),
+      situacao: cadastroForm.situacao.value,
+      anoConclusao: cadastroForm.anoConclusao.value ? Number(cadastroForm.anoConclusao.value) : null,
+      linkedin: cadastroForm.linkedin.value.trim(),
+      fotoUrl: cadastroForm.fotoUrl.value.trim(),
+      cidade: cadastroForm.cidade.value.trim(),
+      estado: cadastroForm.estado.value.trim().toUpperCase(),
+      areaAtuacao: cadastroForm.areaAtuacao.value.trim(),
+      empresaAtual: cadastroForm.empresaAtual.value.trim(),
+      cargoAtual: cadastroForm.cargoAtual.value.trim(),
+      bio: cadastroForm.bio.value.trim(),
+      tipoUsuario: 'egresso',
+      criadoEm: new Date().toISOString()
+    };
+
     const senha = cadastroForm.senha.value;
 
     try {
-      const cred = await createUserWithEmailAndPassword(auth, email, senha);
+      const cred = await createUserWithEmailAndPassword(auth, dados.email, senha);
+      await setDoc(doc(db, 'egressos', cred.user.uid), dados);
 
-      await setDoc(doc(db, 'egressos', cred.user.uid), {
-        nome,
-        email,
-        curso,
-        ano,
-        criadoEm: new Date().toISOString()
-      });
-
-      document.getElementById('mensagem').textContent = 'Cadastro realizado com sucesso!';
+      mensagem.textContent = 'Cadastro realizado com sucesso! Redirecionando...';
       cadastroForm.reset();
+
+      setTimeout(() => {
+        window.location.href = '../index.html';
+      }, 1800);
     } catch (error) {
-      document.getElementById('mensagem').textContent = error.message;
+      console.error(error);
+      mensagem.textContent = traduzirErroFirebase(error.code || error.message);
     }
   });
 }
@@ -52,14 +88,31 @@ if (loginForm) {
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const email = loginForm.email.value;
+    const mensagem = document.getElementById('mensagem-login');
+    mensagem.textContent = 'Entrando...';
+
+    const email = loginForm.email.value.trim();
     const senha = loginForm.senha.value;
 
     try {
       await signInWithEmailAndPassword(auth, email, senha);
       window.location.href = '../index.html';
     } catch (error) {
-      document.getElementById('mensagem-login').textContent = error.message;
+      console.error(error);
+      mensagem.textContent = traduzirErroFirebase(error.code || error.message);
     }
   });
+}
+
+function traduzirErroFirebase(codigo) {
+  const erros = {
+    'auth/email-already-in-use': 'Este e-mail já está cadastrado.',
+    'auth/invalid-email': 'Digite um e-mail válido.',
+    'auth/weak-password': 'A senha precisa ter pelo menos 6 caracteres.',
+    'auth/missing-password': 'Digite uma senha.',
+    'auth/invalid-credential': 'E-mail ou senha inválidos.',
+    'permission-denied': 'Permissão negada no Firestore. Verifique as regras do banco de dados.'
+  };
+
+  return erros[codigo] || `Erro: ${codigo}`;
 }
