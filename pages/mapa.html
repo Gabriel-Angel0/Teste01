@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa de Egressos - Alumni UFJF</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .map-page-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    #mapa-egressos {
+      width: 100%;
+      height: 560px;
+      border-radius: 18px;
+      border: 1px solid var(--gray-200);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .map-filter-panel {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 18px;
+    }
+
+    .map-filter-panel h2,
+    .map-list-panel h2 {
+      font-size: 16px;
+      margin-bottom: 14px;
+      color: var(--gray-900);
+    }
+
+    .map-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .map-stat-card {
+      background: var(--ufjf-blue-light);
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .map-stat-card strong {
+      display: block;
+      font-size: 26px;
+      color: var(--brand-primary);
+      line-height: 1;
+    }
+
+    .map-stat-card span {
+      font-size: 11px;
+      color: var(--gray-600);
+    }
+
+    .map-list-panel {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      max-height: 560px;
+      overflow-y: auto;
+    }
+
+    .map-profile-card {
+      display: flex;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--gray-100);
+      cursor: pointer;
+    }
+
+    .map-profile-card:last-child {
+      border-bottom: none;
+    }
+
+    .map-profile-card:hover h3 {
+      color: var(--brand-primary);
+    }
+
+    .map-profile-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--ufjf-blue-light);
+      color: var(--brand-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .map-profile-card h3 {
+      font-size: 14px;
+      color: var(--gray-900);
+      margin-bottom: 2px;
+    }
+
+    .map-profile-card p {
+      font-size: 12px;
+      color: var(--gray-600);
+      margin-bottom: 2px;
+    }
+
+    .map-profile-card span {
+      font-size: 11px;
+      color: var(--gray-500);
+    }
+
+    @media (max-width: 900px) {
+      .map-page-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #mapa-egressos {
+        height: 420px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../index.html" class="nav-logo">
+      <div class="nav-logo-mark"></div>
+      <div class="nav-logo-text">
+        <strong>Alumni UFJF</strong>
+        <span>Mapa de egressos</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html#beneficios">Benefícios</a></li>
+      <li><a href="eventos.html">Eventos</a></li>
+      <li><a href="vagas.html">Vagas</a></li>
+      <li><a href="cadastro.html">Cadastro</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="../index.html" class="btn btn-sm btn-outline">Voltar</a>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="page-hero-inner">
+      <h1>Mapa interativo de egressos</h1>
+      <p>Explore, com dados fictícios, como a rede Alumni UFJF poderia mostrar a presença de egressos pelo Brasil e pelo mundo.</p>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="container">
+        <div class="map-stats">
+          <div class="map-stat-card"><strong id="total-egressos">0</strong><span>Egressos</span></div>
+          <div class="map-stat-card"><strong id="total-cidades">0</strong><span>Cidades</span></div>
+          <div class="map-stat-card"><strong id="total-cursos">0</strong><span>Cursos</span></div>
+        </div>
+
+        <div class="map-filter-panel">
+          <h2>Filtros</h2>
+          <div class="placeholder-grid">
+            <label>Curso
+              <select id="filtro-curso" class="form-input">
+                <option value="">Todos os cursos</option>
+              </select>
+            </label>
+            <label>Área de atuação
+              <select id="filtro-area" class="form-input">
+                <option value="">Todas as áreas</option>
+              </select>
+            </label>
+            <label>Buscar
+              <input id="filtro-busca" class="form-input" placeholder="Nome, cidade, empresa...">
+            </label>
+          </div>
+        </div>
+
+        <div class="map-page-grid">
+          <div id="mapa-egressos"></div>
+          <aside class="map-list-panel">
+            <h2>Egressos encontrados</h2>
+            <div id="lista-egressos"></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="../assets/js/mapa.js"></script>
+</body>
+</html>
