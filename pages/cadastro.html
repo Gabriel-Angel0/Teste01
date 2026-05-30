@@ -4,15 +4,82 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro - Alumni UFJF</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
   <nav>
-    <a href="../index.html" class="nav-logo"><div class="nav-logo-mark"></div><div class="nav-logo-text"><strong>Alumni UFJF</strong><span>Cadastro</span></div></a>
-    <div class="nav-actions"><a href="../index.html" class="btn btn-sm btn-outline">Voltar</a></div>
+    <a href="../index.html" class="nav-logo">
+      <div class="nav-logo-mark"></div>
+      <div class="nav-logo-text"><strong>Alumni UFJF</strong><span>Cadastro</span></div>
+    </a>
+    <div class="nav-actions">
+      <a href="login.html" class="btn btn-sm btn-outline">Entrar</a>
+      <a href="../index.html" class="btn btn-sm btn-primary">Início</a>
+    </div>
   </nav>
-  <header class="page-hero"><div class="page-hero-inner"><h1>Cadastro de egresso</h1><p>Preencha seus dados para participar da rede Alumni UFJF.</p></div></header>
-  <section><div class="container"><div class="placeholder-card"><form id="form-cadastro"><p><label>Nome completo<br><input required name="nome" style="width:100%;padding:12px;margin:8px 0 16px;border:1px solid #ddd;border-radius:8px"></label></p><p><label>E-mail<br><input required type="email" name="email" style="width:100%;padding:12px;margin:8px 0 16px;border:1px solid #ddd;border-radius:8px"></label></p><p><label>Curso<br><input required name="curso" style="width:100%;padding:12px;margin:8px 0 16px;border:1px solid #ddd;border-radius:8px"></label></p><p><label>Ano de formatura<br><input required name="ano" style="width:100%;padding:12px;margin:8px 0 16px;border:1px solid #ddd;border-radius:8px"></label></p><button class="btn btn-md btn-primary" type="submit">Enviar cadastro</button></form><p id="mensagem" style="margin-top:16px;color:var(--ufjf-green);font-weight:600"></p></div></div></section>
+
+  <header class="page-hero">
+    <div class="page-hero-inner">
+      <h1>Cadastro de egresso</h1>
+      <p>Crie sua conta em duas etapas: primeiro os dados obrigatórios; depois, complete seu perfil profissional.</p>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <div class="placeholder-card">
+        <form id="form-cadastro">
+          <div class="section-label">Etapa 1 — Criar conta</div>
+          <h2 class="section-title">Dados obrigatórios</h2>
+
+          <p><label>Nome completo *<br><input required name="nome" class="form-input"></label></p>
+          <p><label>E-mail *<br><input required type="email" name="email" class="form-input"></label></p>
+          <p><label>Senha *<br><input required type="password" name="senha" minlength="6" class="form-input"></label></p>
+          <p><label>Número de matrícula *<br><input required name="matricula" class="form-input"></label></p>
+          <p><label>Curso *<br><input required name="curso" class="form-input"></label></p>
+          <p><label>Ano de ingresso *<br><input required type="number" name="anoIngresso" min="1946" max="2100" class="form-input"></label></p>
+
+          <p>
+            <label>Situação acadêmica *<br>
+              <select required name="situacao" id="situacao" class="form-input">
+                <option value="">Selecione</option>
+                <option value="cursando">Ainda estou cursando</option>
+                <option value="concluido">Já concluí</option>
+              </select>
+            </label>
+          </p>
+
+          <p id="campo-ano-conclusao" style="display:none;">
+            <label>Ano de conclusão / egresso *<br><input type="number" name="anoConclusao" min="1946" max="2100" class="form-input"></label>
+          </p>
+
+          <hr style="margin:28px 0;border:none;border-top:1px solid var(--gray-200);">
+
+          <div class="section-label">Etapa 2 — Completar perfil</div>
+          <h2 class="section-title">Dados opcionais</h2>
+
+          <p><label>LinkedIn<br><input type="url" name="linkedin" placeholder="https://www.linkedin.com/in/seu-perfil" class="form-input"></label></p>
+          <p><label>Foto de perfil<br><input type="url" name="fotoUrl" placeholder="Cole o link da sua foto por enquanto" class="form-input"></label></p>
+          <p><label>Cidade atual<br><input name="cidade" class="form-input"></label></p>
+          <p><label>Estado atual<br><input name="estado" maxlength="2" placeholder="MG" class="form-input"></label></p>
+          <p><label>Área de atuação<br><input name="areaAtuacao" placeholder="Ex: Finanças, Tecnologia, Saúde" class="form-input"></label></p>
+          <p><label>Empresa atual<br><input name="empresaAtual" class="form-input"></label></p>
+          <p><label>Cargo atual<br><input name="cargoAtual" class="form-input"></label></p>
+          <p><label>Mini bio<br><textarea name="bio" rows="4" class="form-input" placeholder="Conte brevemente sua trajetória"></textarea></label></p>
+
+          <p><label><input required type="checkbox" name="aceiteTermos"> Aceito os termos de uso e a política de privacidade *</label></p>
+
+          <button class="btn btn-md btn-primary" type="submit">Criar minha conta</button>
+        </form>
+        <p id="mensagem" style="margin-top:16px;color:var(--ufjf-green);font-weight:600"></p>
+      </div>
+    </div>
+  </section>
+
   <script src="../assets/js/main.js" defer></script>
+  <script type="module" src="../assets/js/auth.js"></script>
 </body>
 </html>
