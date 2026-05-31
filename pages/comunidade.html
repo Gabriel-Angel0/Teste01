@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comunidade - Alumni UFJF</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .directory-toolbar { display:grid; grid-template-columns: 1.2fr .8fr .8fr; gap:12px; margin-bottom:24px; }
+    .alumni-directory { display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; }
+    .alumni-card { background:white; border:1px solid var(--gray-200); border-radius:22px; padding:22px; box-shadow:var(--shadow-sm); transition:.2s; }
+    .alumni-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-md); border-color:rgba(0,94,131,.25); }
+    .alumni-top { display:flex; gap:14px; align-items:center; margin-bottom:16px; }
+    .alumni-avatar { width:54px; height:54px; border-radius:18px; background:var(--ufjf-blue-light); color:var(--brand-primary); display:flex; align-items:center; justify-content:center; font-weight:800; }
+    .alumni-card h3 { font-size:16px; color:var(--gray-900); margin-bottom:3px; }
+    .alumni-card small { color:var(--gray-500); font-weight:600; }
+    .alumni-meta { display:grid; gap:8px; font-size:13px; color:var(--gray-600); margin:14px 0; }
+    .alumni-actions { display:flex; gap:8px; flex-wrap:wrap; }
+    .community-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:28px; }
+    .community-stat { background:white; border:1px solid var(--gray-200); border-radius:18px; padding:18px; }
+    .community-stat strong { display:block; font-size:26px; color:var(--brand-primary); }
+    .community-stat span { font-size:12px; color:var(--gray-500); font-weight:700; text-transform:uppercase; letter-spacing:.06em; }
+    @media(max-width:900px){ .directory-toolbar,.alumni-directory,.community-stats{ grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../index.html" class="nav-logo"><div class="nav-logo-mark"></div><div class="nav-logo-text"><strong>Alumni UFJF</strong><span>Comunidade</span></div></a>
+    <ul class="nav-links"><li><a href="perfil.html">Meu perfil</a></li><li><a href="mapa.html">Mapa</a></li><li><a href="vagas.html">Vagas</a></li><li><a href="eventos.html">Eventos</a></li></ul>
+    <div class="nav-actions"><a href="perfil.html" class="btn btn-sm btn-primary">Área de membros</a></div>
+  </nav>
+
+  <header class="page-hero"><div class="page-hero-inner"><h1>Comunidade Alumni UFJF</h1><p>Encontre egressos por curso, cidade, área de atuação e trajetória profissional. Esta versão usa perfis demonstrativos para representar a futura rede Alumni.</p></div></header>
+
+  <main><section><div class="container">
+    <div class="community-stats">
+      <div class="community-stat"><strong>128</strong><span>Perfis demonstrativos</span></div>
+      <div class="community-stat"><strong>32</strong><span>Áreas de atuação</span></div>
+      <div class="community-stat"><strong>18</strong><span>Cidades</span></div>
+      <div class="community-stat"><strong>9</strong><span>Cursos representados</span></div>
+    </div>
+
+    <div class="placeholder-card" style="margin-bottom:24px;"><div class="directory-toolbar"><input class="form-input" placeholder="Buscar por nome, empresa ou cidade"><select class="form-input"><option>Todos os cursos</option><option>Economia</option><option>Medicina</option><option>Direito</option><option>Ciência da Computação</option></select><select class="form-input"><option>Todas as áreas</option><option>Finanças</option><option>Saúde</option><option>Tecnologia</option><option>Educação</option></select></div><p style="color:var(--gray-600);font-size:14px;">Os filtros são visuais nesta versão. Na etapa final, eles podem ser conectados ao Firebase para buscar perfis reais cadastrados.</p></div>
+
+    <div class="alumni-directory">
+      <article class="alumni-card"><div class="alumni-top"><div class="alumni-avatar">AS</div><div><h3>Ana Souza</h3><small>Medicina · 2018</small></div></div><div class="alumni-meta"><span>📍 Rio de Janeiro, RJ</span><span>🏥 Cardiologista · Hospital Universitário</span><span>🤝 Disponível para mentoria</span></div><div class="alumni-actions"><a class="btn btn-sm btn-outline" href="#">Ver perfil</a><a class="btn btn-sm btn-primary" href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a></div></article>
+      <article class="alumni-card"><div class="alumni-top"><div class="alumni-avatar">BR</div><div><h3>Bruno Ribeiro</h3><small>Economia · 2022</small></div></div><div class="alumni-meta"><span>📍 Belo Horizonte, MG</span><span>💼 Analista financeiro · Banco Mineiro</span><span>📬 Aceita contato</span></div><div class="alumni-actions"><a class="btn btn-sm btn-outline" href="#">Ver perfil</a><a class="btn btn-sm btn-primary" href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a></div></article>
+      <article class="alumni-card"><div class="alumni-top"><div class="alumni-avatar">MC</div><div><h3>Marina Costa</h3><small>Ciência da Computação · 2021</small></div></div><div class="alumni-meta"><span>📍 Florianópolis, SC</span><span>💻 Engenheira de Software · GovTech Brasil</span><span>🌍 Aparece no mapa</span></div><div class="alumni-actions"><a class="btn btn-sm btn-outline" href="#">Ver perfil</a><a class="btn btn-sm btn-primary" href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a></div></article>
+      <article class="alumni-card"><div class="alumni-top"><div class="alumni-avatar">RF</div><div><h3>Rafael Fonseca</h3><small>Direito · 2011</small></div></div><div class="alumni-meta"><span>📍 Juiz de Fora, MG</span><span>⚖️ Advogado trabalhista · TBR Advogados</span><span>🎓 Mentor Alumni</span></div><div class="alumni-actions"><a class="btn btn-sm btn-outline" href="#">Ver perfil</a><a class="btn btn-sm btn-primary" href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a></div></article>
+      <article class="alumni-card"><div class="alumni-top"><div class="alumni-avatar">LB</div><div><h3>Larissa Borges</h3><small>Letras · 2020</small></div></div><div class="alumni-meta"><span>📍 Lisboa, Portugal</span><span>📚 Professora e pesquisadora</span><span>🌐 Rede internacional</span></div><div class="alumni-actions"><a class="btn btn-sm btn-outline" href="#">Ver perfil</a><a class="btn btn-sm btn-primary" href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a></div></article>
+      <article class="alumni-card"><div class="alumni-top"><div class="alumni-avatar">FT</div><div><h3>Felipe Torres</h3><small>Administração · 2019</small></div></div><div class="alumni-meta"><span>📍 Brasília, DF</span><span>🏛️ Consultor de operações · Setor Público</span><span>💼 Recebe oportunidades</span></div><div class="alumni-actions"><a class="btn btn-sm btn-outline" href="#">Ver perfil</a><a class="btn btn-sm btn-primary" href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a></div></article>
+    </div>
+  </div></section></main>
+</body>
+</html>
