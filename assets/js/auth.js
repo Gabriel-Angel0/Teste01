@@ -61,8 +61,15 @@ if (cadastroForm) {
       empresaAtual: cadastroForm.empresaAtual.value.trim(),
       cargoAtual: cadastroForm.cargoAtual.value.trim(),
       bio: cadastroForm.bio.value.trim(),
+      aparecerNoMapa: cadastroForm.aparecerNoMapa ? cadastroForm.aparecerNoMapa.checked : false,
+      aceitarContato: cadastroForm.aceitarContato ? cadastroForm.aceitarContato.checked : false,
+      receberOportunidades: cadastroForm.receberOportunidades ? cadastroForm.receberOportunidades.checked : false,
+      participarMentoria: cadastroForm.participarMentoria ? cadastroForm.participarMentoria.checked : false,
+      receberNewsletter: cadastroForm.receberNewsletter ? cadastroForm.receberNewsletter.checked : false,
+      statusVerificacao: 'pendente',
       tipoUsuario: 'egresso',
-      criadoEm: new Date().toISOString()
+      criadoEm: new Date().toISOString(),
+      atualizadoEm: new Date().toISOString()
     };
 
     const senha = cadastroForm.senha.value;
@@ -71,11 +78,11 @@ if (cadastroForm) {
       const cred = await createUserWithEmailAndPassword(auth, dados.email, senha);
       await setDoc(doc(db, 'egressos', cred.user.uid), dados);
 
-      mensagem.textContent = 'Cadastro realizado com sucesso! Redirecionando...';
+      mensagem.textContent = 'Cadastro realizado com sucesso! Redirecionando para seu perfil...';
       cadastroForm.reset();
 
       setTimeout(() => {
-        window.location.href = '../index.html';
+        window.location.href = 'perfil.html';
       }, 1800);
     } catch (error) {
       console.error(error);
@@ -96,7 +103,7 @@ if (loginForm) {
 
     try {
       await signInWithEmailAndPassword(auth, email, senha);
-      window.location.href = '../index.html';
+      window.location.href = 'perfil.html';
     } catch (error) {
       console.error(error);
       mensagem.textContent = traduzirErroFirebase(error.code || error.message);
