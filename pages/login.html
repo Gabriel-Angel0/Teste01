@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrar - Alumni UFJF</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <nav>
+    <a href="../index.html" class="nav-logo"><div class="nav-logo-mark"></div><div class="nav-logo-text"><strong>Alumni UFJF</strong><span>Entrar</span></div></a>
+    <div class="nav-actions"><a href="cadastro.html" class="btn btn-sm btn-primary">Criar conta</a><a href="../index.html" class="btn btn-sm btn-outline">Início</a></div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="page-hero-inner">
+      <h1>Entrar na área de membros</h1>
+      <p>Acesse seu perfil Alumni UFJF usando o e-mail e senha cadastrados.</p>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <div class="placeholder-card" style="max-width:560px;margin:auto;">
+        <form id="form-login">
+          <p><label>E-mail<br><input required type="email" name="email" class="form-input"></label></p>
+          <p><label>Senha<br><input required type="password" name="senha" class="form-input"></label></p>
+          <button class="btn btn-md btn-primary" type="submit">Entrar</button>
+        </form>
+        <p id="mensagem-login" style="margin-top:16px;color:var(--brand-primary);font-weight:600"></p>
+        <p style="margin-top:18px;font-size:14px;">Ainda não tem conta? <a href="cadastro.html">Cadastre-se</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <script type="module" src="../assets/js/auth.js"></script>
+</body>
+</html>
