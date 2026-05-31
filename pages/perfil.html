@@ -28,6 +28,11 @@
     .quick-nav a { text-decoration: none; border: 1px solid var(--gray-200); border-radius: 16px; padding: 14px; color: var(--gray-700); font-size: 13px; font-weight: 700; background: var(--gray-50); display: flex; justify-content: space-between; align-items: center; }
     .quick-nav a:hover { background: var(--ufjf-blue-light); color: var(--brand-primary); border-color: rgba(0,94,131,.22); }
     .dashboard-main { display: grid; gap: 18px; }
+    .profile-tabs { display: inline-flex; gap: 8px; padding: 6px; border-radius: 999px; background: rgba(255,255,255,.85); border: 1px solid var(--gray-200); width: fit-content; }
+    .profile-tab { border: 0; cursor: pointer; border-radius: 999px; padding: 10px 16px; background: transparent; font-family: inherit; font-weight: 800; font-size: 13px; color: var(--gray-600); }
+    .profile-tab.active { background: var(--brand-primary); color: white; box-shadow: 0 6px 20px rgba(0,94,131,.22); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: grid; gap: 18px; }
     .welcome-card { padding: 24px; display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; }
     .welcome-card h2 { font-size: 20px; color: var(--gray-900); margin-bottom: 6px; }
     .welcome-card p { color: var(--gray-600); font-size: 14px; }
@@ -52,9 +57,8 @@
     .feature-card b { display: block; color: var(--gray-900); margin: 8px 0 4px; }
     .feature-card span { font-size: 12px; color: var(--gray-600); }
     .profile-section-title { font-size: 18px; margin: 0 0 16px; color: var(--gray-900); }
-    #perfil-conteudo, #perfil-erro, #perfil-edicao { display: none; }
-    #perfil-edicao { margin-top: 18px; }
-    @media (max-width: 900px) { .member-hero-inner, .welcome-card { display:block; } .member-dashboard { grid-template-columns: 1fr; } .profile-main { position: static; } .member-grid, .preference-grid, .feature-grid, .stats-row { grid-template-columns: 1fr; } .member-shell { padding: 0 20px 52px; } }
+    #perfil-conteudo, #perfil-erro { display: none; }
+    @media (max-width: 900px) { .member-hero-inner, .welcome-card { display:block; } .member-dashboard { grid-template-columns: 1fr; } .profile-main { position: static; } .member-grid, .preference-grid, .feature-grid, .stats-row { grid-template-columns: 1fr; } .member-shell { padding: 0 20px 52px; } .profile-tabs { width: 100%; } .profile-tab { flex: 1; } }
   </style>
 </head>
 <body>
@@ -82,12 +86,13 @@
         <p id="perfil-curso" class="member-subtitle">Curso</p>
         <span id="perfil-status" class="member-status">Verificação pendente</span>
         <p id="perfil-bio" class="member-bio">Bio</p>
-        <div class="member-actions"><a id="perfil-linkedin" class="btn btn-sm btn-primary" href="#" target="_blank" rel="noopener">LinkedIn</a><button id="btn-editar" class="btn btn-sm btn-outline" type="button">Editar perfil</button></div>
+        <div class="member-actions"><a id="perfil-linkedin" class="btn btn-sm btn-primary" href="#" target="_blank" rel="noopener">LinkedIn</a></div>
         <div class="quick-nav"><a href="mapa.html">🌍 Mapa de egressos <span>→</span></a><a href="vagas.html">💼 Oportunidades <span>→</span></a><a href="eventos.html">📅 Eventos <span>→</span></a><a href="comunidade.html">👥 Comunidade <span>→</span></a></div>
       </aside>
 
       <div class="dashboard-main">
-        <section id="perfil-visualizacao">
+        <div class="profile-tabs"><button class="profile-tab active" data-tab="overview" type="button">Visão geral</button><button id="btn-editar" class="profile-tab" data-tab="edit" type="button">Editar perfil</button></div>
+        <section id="perfil-visualizacao" class="tab-panel active">
           <div class="glass-card welcome-card"><div><h2>Resumo do perfil</h2><p>Mantenha seus dados atualizados para melhorar sua presença na rede Alumni UFJF.</p></div><button id="btn-editar-hero" class="btn btn-md btn-primary" type="button">Atualizar dados</button></div>
           <div class="stats-row"><div class="mini-stat"><span>Localização</span><strong id="perfil-localizacao">—</strong></div><div class="mini-stat"><span>Área</span><strong id="perfil-area">—</strong></div><div class="mini-stat"><span>Conclusão</span><strong id="perfil-conclusao">—</strong></div></div>
           <section class="member-card"><h2 class="profile-section-title">Dados acadêmicos e profissionais</h2><div class="member-grid"><div class="info-box"><span>E-mail</span><strong id="perfil-email">—</strong></div><div class="info-box"><span>Matrícula</span><strong id="perfil-matricula">—</strong></div><div class="info-box"><span>Ano de ingresso</span><strong id="perfil-ingresso">—</strong></div><div class="info-box"><span>Empresa atual</span><strong id="perfil-empresa">—</strong></div><div class="info-box"><span>Cargo atual</span><strong id="perfil-cargo">—</strong></div></div></section>
@@ -95,13 +100,13 @@
           <section class="member-card"><h2 class="profile-section-title">Acesse a plataforma</h2><div class="feature-grid"><a class="feature-card" href="mapa.html">🌍<b>Mapa Alumni</b><span>Encontre egressos por cidade e área.</span></a><a class="feature-card" href="vagas.html">💼<b>Vagas</b><span>Veja oportunidades para sua área.</span></a><a class="feature-card" href="eventos.html">📅<b>Eventos</b><span>Acompanhe encontros e palestras.</span></a></div></section>
         </section>
 
-        <section id="perfil-edicao" class="member-card">
+        <section id="perfil-edicao" class="tab-panel member-card">
           <h2 class="profile-section-title">Editar perfil</h2>
           <form id="form-perfil">
             <div class="member-grid"><label>Nome completo<input name="nome" class="form-input" required></label><label>Curso<input name="curso" class="form-input" required></label><label>Matrícula<input name="matricula" class="form-input" required></label><label>Ano de ingresso<input name="anoIngresso" type="number" class="form-input"></label><label>Ano de conclusão<input name="anoConclusao" type="number" class="form-input"></label><label>LinkedIn<input name="linkedin" type="url" class="form-input"></label><label>Foto URL<input name="fotoUrl" type="url" class="form-input"></label><label>Cidade<input name="cidade" class="form-input"></label><label>Estado<input name="estado" class="form-input" maxlength="2"></label><label>Área de atuação<input name="areaAtuacao" class="form-input"></label><label>Empresa atual<input name="empresaAtual" class="form-input"></label><label>Cargo atual<input name="cargoAtual" class="form-input"></label></div>
             <label>Mini bio<textarea name="bio" rows="4" class="form-input"></textarea></label>
             <div class="preference-grid"><label class="preference-item"><strong>Aparecer no mapa</strong><input type="checkbox" name="aparecerNoMapa"></label><label class="preference-item"><strong>Aceitar contato</strong><input type="checkbox" name="aceitarContato"></label><label class="preference-item"><strong>Receber oportunidades</strong><input type="checkbox" name="receberOportunidades"></label><label class="preference-item"><strong>Participar de mentoria</strong><input type="checkbox" name="participarMentoria"></label><label class="preference-item"><strong>Newsletter Alumni</strong><input type="checkbox" name="receberNewsletter"></label></div>
-            <div class="member-actions"><button id="btn-salvar" class="btn btn-md btn-primary" type="submit">Salvar alterações</button></div>
+            <div class="member-actions"><button id="btn-salvar" class="btn btn-md btn-primary" type="submit">Salvar alterações</button><button class="btn btn-md btn-outline" data-tab="overview" type="button">Cancelar</button></div>
           </form>
         </section>
       </div>
@@ -109,6 +114,16 @@
   </main>
 
   <script type="module" src="../assets/js/perfil.js"></script>
-  <script>document.addEventListener('click', function(e){ if(e.target && e.target.id === 'btn-editar-hero'){ document.getElementById('btn-editar')?.click(); } });</script>
+  <script>
+    function abrirAbaPerfil(tab) {
+      document.querySelectorAll('.profile-tab').forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tab));
+      document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.toggle('active', panel.id === (tab === 'edit' ? 'perfil-edicao' : 'perfil-visualizacao')));
+    }
+    document.addEventListener('click', function(e) {
+      const tab = e.target?.dataset?.tab;
+      if (tab) abrirAbaPerfil(tab);
+      if (e.target && e.target.id === 'btn-editar-hero') abrirAbaPerfil('edit');
+    });
+  </script>
 </body>
 </html>
