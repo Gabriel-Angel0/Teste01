@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eventos - Alumni UFJF</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .event-highlight { display:grid; grid-template-columns:1fr .7fr; gap:22px; margin-bottom:28px; }
+    .event-main { background:linear-gradient(135deg,#07151B,#005E83); color:white; border-radius:26px; padding:32px; box-shadow:var(--shadow-lg); }
+    .event-main h2 { font-family:'DM Serif Display',serif; font-size:34px; margin:10px 0; }
+    .event-main p { color:rgba(255,255,255,.75); }
+    .event-date-large { background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.16); width:86px; border-radius:20px; padding:14px; text-align:center; }
+    .event-date-large strong { display:block; font-size:32px; line-height:1; }
+    .event-side { display:grid; gap:14px; }
+    .small-event { background:white; border:1px solid var(--gray-200); border-radius:20px; padding:18px; box-shadow:var(--shadow-sm); }
+    .events-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .event-card { background:white; border:1px solid var(--gray-200); border-radius:22px; padding:22px; box-shadow:var(--shadow-sm); }
+    .event-card h3 { font-size:16px; color:var(--gray-900); margin:10px 0 6px; }
+    .event-card p { font-size:13px; color:var(--gray-600); margin-bottom:14px; }
+    .event-chip { display:inline-flex; font-size:11px; font-weight:800; padding:5px 10px; border-radius:999px; background:var(--ufjf-blue-light); color:var(--brand-primary); }
+    .agenda-section { margin-top:34px; }
+    @media(max-width:900px){ .event-highlight,.events-grid{ grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <nav><a href="../index.html" class="nav-logo"><div class="nav-logo-mark"></div><div class="nav-logo-text"><strong>Alumni UFJF</strong><span>Eventos</span></div></a><ul class="nav-links"><li><a href="perfil.html">Meu perfil</a></li><li><a href="comunidade.html">Comunidade</a></li><li><a href="vagas.html">Vagas</a></li><li><a href="mapa.html">Mapa</a></li></ul><div class="nav-actions"><a href="perfil.html" class="btn btn-sm btn-primary">Área de membros</a></div></nav>
+  <header class="page-hero"><div class="page-hero-inner"><h1>Eventos Alumni UFJF</h1><p>Agenda demonstrativa de encontros, palestras, mentorias, feiras de carreira e ações de retorno à comunidade.</p></div></header>
+  <main><section><div class="container">
+    <div class="event-highlight"><article class="event-main"><div class="event-date-large"><strong>20</strong><span>JUN</span></div><h2>Prêmio Alumni UFJF</h2><p>Cerimônia de homenagem a egressos de destaque, com networking entre estudantes, professores, empresas parceiras e ex-alunos.</p><div class="member-actions"><a class="btn btn-md btn-gold" href="#">Inscrever-se</a><a class="btn btn-md btn-ghost" href="#">Adicionar ao calendário</a></div></article><aside class="event-side"><div class="small-event"><span class="event-chip">Online</span><h3>Alumni Talks — Tecnologia & Inovação</h3><p>12 JUN · 19h · Egressos do DCC</p></div><div class="small-event"><span class="event-chip">Presencial</span><h3>Encontro de Egressos em Juiz de Fora</h3><p>05 JUL · Campus UFJF</p></div><div class="small-event"><span class="event-chip">Mentoria</span><h3>Carreira acadêmica no exterior</h3><p>18 JUL · Comunidade internacional</p></div></aside></div>
+    <div class="agenda-section"><div class="section-head"><div class="section-label">📅 Próximos eventos</div><h2 class="section-title">Agenda Alumni</h2></div><div class="events-grid"><article class="event-card"><span class="event-chip">Webinar</span><h3>Mercado financeiro para egressos</h3><p>Conversa com ex-alunos de Economia atuando em bancos, consultorias e asset management.</p><a class="btn btn-sm btn-outline" href="#">Ver detalhes</a></article><article class="event-card"><span class="event-chip">Networking</span><h3>Conexões Alumni SP</h3><p>Encontro regional para egressos da UFJF que vivem ou trabalham em São Paulo.</p><a class="btn btn-sm btn-outline" href="#">Ver detalhes</a></article><article class="event-card"><span class="event-chip">Atualização</span><h3>Curso rápido de IA aplicada</h3><p>Oficina introdutória sobre ferramentas de IA para pesquisa, gestão e produtividade.</p><a class="btn btn-sm btn-outline" href="#">Ver detalhes</a></article><article class="event-card"><span class="event-chip">Comunidade</span><h3>Voluntariado Alumni</h3><p>Chamada para egressos interessados em apoiar ações sociais em Juiz de Fora.</p><a class="btn btn-sm btn-outline" href="#">Ver detalhes</a></article><article class="event-card"><span class="event-chip">Carreira</span><h3>Feira de oportunidades</h3><p>Empresas parceiras apresentam vagas, programas de trainee e projetos de pesquisa aplicada.</p><a class="btn btn-sm btn-outline" href="#">Ver detalhes</a></article><article class="event-card"><span class="event-chip">Pesquisa</span><h3>Egressos na pós-graduação</h3><p>Mesa-redonda sobre mestrado, doutorado, bolsas, publicações e carreira acadêmica.</p><a class="btn btn-sm btn-outline" href="#">Ver detalhes</a></article></div></div>
+  </div></section></main>
+</body>
+</html>
