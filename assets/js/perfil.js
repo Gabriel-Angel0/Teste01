@@ -21,7 +21,6 @@ const loading = document.getElementById('perfil-loading');
 const conteudo = document.getElementById('perfil-conteudo');
 const erro = document.getElementById('perfil-erro');
 const sairBtn = document.getElementById('btn-sair');
-const editarBtn = document.getElementById('btn-editar');
 const salvarBtn = document.getElementById('btn-salvar');
 const form = document.getElementById('form-perfil');
 
@@ -52,7 +51,8 @@ async function carregarPerfil(uid) {
     preencherFormulario(dados);
 
     loading.style.display = 'none';
-    conteudo.style.display = 'block';
+    conteudo.style.display = 'grid';
+    abrirAbaPerfil('overview');
   } catch (error) {
     console.error(error);
     mostrarErro('Não foi possível carregar seu perfil. Verifique as regras do Firestore e tente novamente.');
@@ -87,6 +87,8 @@ function preencherTela(dados) {
   const avatar = document.getElementById('perfil-avatar');
   if (avatar) {
     avatar.textContent = gerarIniciais(dados.nome || 'Egresso UFJF');
+    avatar.style.backgroundImage = '';
+
     if (dados.fotoUrl) {
       avatar.style.backgroundImage = `url('${dados.fotoUrl}')`;
       avatar.style.backgroundSize = 'cover';
@@ -125,13 +127,6 @@ function preencherFormulario(dados) {
   form.receberNewsletter.checked = Boolean(dados.receberNewsletter);
 }
 
-if (editarBtn) {
-  editarBtn.addEventListener('click', () => {
-    document.getElementById('perfil-visualizacao').style.display = 'none';
-    document.getElementById('perfil-edicao').style.display = 'block';
-  });
-}
-
 if (form) {
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -167,8 +162,7 @@ if (form) {
       const ref = doc(db, 'egressos', usuarioAtual.uid);
       await updateDoc(ref, dadosAtualizados);
       preencherTela(dadosAtualizados);
-      document.getElementById('perfil-edicao').style.display = 'none';
-      document.getElementById('perfil-visualizacao').style.display = 'block';
+      abrirAbaPerfil('overview');
     } catch (error) {
       console.error(error);
       alert('Não foi possível salvar as alterações.');
@@ -185,6 +179,29 @@ if (sairBtn) {
     window.location.href = '../index.html';
   });
 }
+
+function abrirAbaPerfil(tab) {
+  const visualizacao = document.getElementById('perfil-visualizacao');
+  const edicao = document.getElementById('perfil-edicao');
+
+  document.querySelectorAll('.profile-tab').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === tab);
+  });
+
+  if (visualizacao) visualizacao.classList.toggle('active', tab === 'overview');
+  if (edicao) edicao.classList.toggle('active', tab === 'edit');
+}
+
+window.abrirAbaPerfil = abrirAbaPerfil;
+
+document.addEventListener('click', (event) => {
+  const tab = event.target?.dataset?.tab;
+  if (tab) abrirAbaPerfil(tab);
+
+  if (event.target?.id === 'btn-editar-hero') {
+    abrirAbaPerfil('edit');
+  }
+});
 
 function setText(id, valor) {
   const el = document.getElementById(id);
