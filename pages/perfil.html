@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Perfil - Alumni UFJF</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .member-layout { display: grid; grid-template-columns: 320px 1fr; gap: 24px; align-items: start; }
+    .member-card { background: #fff; border: 1px solid var(--gray-200); border-radius: 22px; padding: 26px; box-shadow: var(--shadow-sm); }
+    .member-avatar { width: 96px; height: 96px; border-radius: 50%; background: var(--ufjf-blue-light); color: var(--brand-primary); display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 800; margin-bottom: 16px; }
+    .member-name { font-size: 24px; margin-bottom: 4px; color: var(--gray-900); }
+    .member-subtitle { font-size: 14px; color: var(--gray-600); margin-bottom: 14px; }
+    .member-status { display: inline-flex; align-items: center; padding: 5px 10px; border-radius: 999px; background: var(--ufjf-blue-light); color: var(--brand-primary); font-size: 12px; font-weight: 700; margin-bottom: 18px; }
+    .member-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+    .member-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .info-box { border: 1px solid var(--gray-200); border-radius: 14px; padding: 16px; background: var(--gray-50); }
+    .info-box span { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--gray-500); margin-bottom: 6px; font-weight: 700; }
+    .info-box strong { font-size: 15px; color: var(--gray-900); }
+    .preference-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px; }
+    .preference-item { border: 1px solid var(--gray-200); border-radius: 14px; padding: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .preference-item strong { font-size: 13px; color: var(--gray-800); }
+    .status-pill { font-size: 11px; padding: 4px 9px; border-radius: 999px; font-weight: 700; }
+    .status-on { background: var(--ufjf-green-light); color: var(--ufjf-green); }
+    .status-off { background: var(--gray-100); color: var(--gray-500); }
+    .profile-section-title { font-size: 18px; margin: 0 0 16px; color: var(--gray-900); }
+    .profile-nav { display: grid; gap: 10px; margin-top: 20px; }
+    .profile-nav a { text-decoration: none; border: 1px solid var(--gray-200); border-radius: 12px; padding: 12px; color: var(--gray-700); font-size: 13px; font-weight: 600; }
+    .profile-nav a:hover { background: var(--ufjf-blue-light); color: var(--brand-primary); }
+    #perfil-conteudo, #perfil-erro, #perfil-edicao { display: none; }
+    @media (max-width: 900px) { .member-layout { grid-template-columns: 1fr; } .member-grid, .preference-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../index.html" class="nav-logo">
+      <div class="nav-logo-mark"></div>
+      <div class="nav-logo-text"><strong>Alumni UFJF</strong><span>Área de membros</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="mapa.html">Mapa</a></li>
+      <li><a href="vagas.html">Vagas</a></li>
+      <li><a href="eventos.html">Eventos</a></li>
+      <li><a href="comunidade.html">Comunidade</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button id="btn-sair" class="btn btn-sm btn-outline" type="button">Sair</button>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="page-hero-inner">
+      <h1>Minha área Alumni</h1>
+      <p>Gerencie seu perfil, sua visibilidade no mapa, preferências de contato, oportunidades e participação na comunidade UFJF.</p>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="container">
+        <p id="perfil-loading" class="placeholder-card">Carregando seu perfil...</p>
+        <p id="perfil-erro" class="placeholder-card" style="color:var(--ufjf-red);font-weight:700;"></p>
+
+        <div id="perfil-conteudo" class="member-layout">
+          <aside class="member-card">
+            <div id="perfil-avatar" class="member-avatar">AU</div>
+            <h2 id="perfil-nome" class="member-name">Egresso UFJF</h2>
+            <p id="perfil-curso" class="member-subtitle">Curso</p>
+            <span id="perfil-status" class="member-status">Verificação pendente</span>
+            <p id="perfil-bio" style="font-size:14px;color:var(--gray-600);margin-top:10px;">Bio</p>
+            <div class="member-actions">
+              <a id="perfil-linkedin" class="btn btn-sm btn-primary" href="#" target="_blank" rel="noopener">LinkedIn</a>
+              <button id="btn-editar" class="btn btn-sm btn-outline" type="button">Editar perfil</button>
+            </div>
+            <div class="profile-nav">
+              <a href="mapa.html">🌍 Ver mapa de egressos</a>
+              <a href="vagas.html">💼 Ver oportunidades</a>
+              <a href="eventos.html">📅 Ver eventos</a>
+              <a href="comunidade.html">👥 Ver comunidade</a>
+            </div>
+          </aside>
+
+          <section id="perfil-visualizacao" class="member-card">
+            <h2 class="profile-section-title">Dados acadêmicos e profissionais</h2>
+            <div class="member-grid">
+              <div class="info-box"><span>E-mail</span><strong id="perfil-email">—</strong></div>
+              <div class="info-box"><span>Matrícula</span><strong id="perfil-matricula">—</strong></div>
+              <div class="info-box"><span>Ano de ingresso</span><strong id="perfil-ingresso">—</strong></div>
+              <div class="info-box"><span>Ano de conclusão</span><strong id="perfil-conclusao">—</strong></div>
+              <div class="info-box"><span>Localização</span><strong id="perfil-localizacao">—</strong></div>
+              <div class="info-box"><span>Área de atuação</span><strong id="perfil-area">—</strong></div>
+              <div class="info-box"><span>Empresa atual</span><strong id="perfil-empresa">—</strong></div>
+              <div class="info-box"><span>Cargo atual</span><strong id="perfil-cargo">—</strong></div>
+            </div>
+
+            <h2 class="profile-section-title" style="margin-top:28px;">Preferências</h2>
+            <div class="preference-grid">
+              <div class="preference-item"><strong>Aparecer no mapa</strong><span id="pref-mapa" class="status-pill">—</span></div>
+              <div class="preference-item"><strong>Aceitar contato</strong><span id="pref-contato" class="status-pill">—</span></div>
+              <div class="preference-item"><strong>Receber oportunidades</strong><span id="pref-oportunidades" class="status-pill">—</span></div>
+              <div class="preference-item"><strong>Participar de mentoria</strong><span id="pref-mentoria" class="status-pill">—</span></div>
+              <div class="preference-item"><strong>Newsletter Alumni</strong><span id="pref-newsletter" class="status-pill">—</span></div>
+            </div>
+          </section>
+
+          <section id="perfil-edicao" class="member-card">
+            <h2 class="profile-section-title">Editar perfil</h2>
+            <form id="form-perfil">
+              <div class="member-grid">
+                <label>Nome completo<input name="nome" class="form-input" required></label>
+                <label>Curso<input name="curso" class="form-input" required></label>
+                <label>Matrícula<input name="matricula" class="form-input" required></label>
+                <label>Ano de ingresso<input name="anoIngresso" type="number" class="form-input"></label>
+                <label>Ano de conclusão<input name="anoConclusao" type="number" class="form-input"></label>
+                <label>LinkedIn<input name="linkedin" type="url" class="form-input"></label>
+                <label>Foto URL<input name="fotoUrl" type="url" class="form-input"></label>
+                <label>Cidade<input name="cidade" class="form-input"></label>
+                <label>Estado<input name="estado" class="form-input" maxlength="2"></label>
+                <label>Área de atuação<input name="areaAtuacao" class="form-input"></label>
+                <label>Empresa atual<input name="empresaAtual" class="form-input"></label>
+                <label>Cargo atual<input name="cargoAtual" class="form-input"></label>
+              </div>
+              <label>Mini bio<textarea name="bio" rows="4" class="form-input"></textarea></label>
+              <div class="preference-grid">
+                <label class="preference-item"><strong>Aparecer no mapa</strong><input type="checkbox" name="aparecerNoMapa"></label>
+                <label class="preference-item"><strong>Aceitar contato</strong><input type="checkbox" name="aceitarContato"></label>
+                <label class="preference-item"><strong>Receber oportunidades</strong><input type="checkbox" name="receberOportunidades"></label>
+                <label class="preference-item"><strong>Participar de mentoria</strong><input type="checkbox" name="participarMentoria"></label>
+                <label class="preference-item"><strong>Newsletter Alumni</strong><input type="checkbox" name="receberNewsletter"></label>
+              </div>
+              <div class="member-actions">
+                <button id="btn-salvar" class="btn btn-md btn-primary" type="submit">Salvar alterações</button>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="../assets/js/perfil.js"></script>
+</body>
+</html>
