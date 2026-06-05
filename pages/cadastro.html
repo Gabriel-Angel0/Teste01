@@ -11,75 +11,41 @@
 </head>
 <body>
   <nav>
-    <a href="../index.html" class="nav-logo">
-      <div class="nav-logo-mark"></div>
-      <div class="nav-logo-text"><strong>Alumni UFJF</strong><span>Cadastro</span></div>
-    </a>
-    <div class="nav-actions">
-      <a href="login.html" class="btn btn-sm btn-outline">Entrar</a>
-      <a href="../index.html" class="btn btn-sm btn-primary">Início</a>
-    </div>
+    <a href="../index.html" class="nav-logo"><div class="nav-logo-mark"></div><div class="nav-logo-text"><strong>Alumni UFJF</strong><span>Cadastro</span></div></a>
+    <div class="nav-actions"><a href="login.html" class="btn btn-sm btn-outline">Entrar</a><a href="../index.html" class="btn btn-sm btn-primary">Início</a></div>
   </nav>
-
-  <header class="page-hero">
-    <div class="page-hero-inner">
-      <h1>Cadastro de egresso</h1>
-      <p>Crie sua conta em duas etapas: primeiro os dados obrigatórios; depois, complete seu perfil profissional.</p>
-    </div>
-  </header>
-
-  <section>
-    <div class="container">
-      <div class="placeholder-card">
-        <form id="form-cadastro">
-          <div class="section-label">Etapa 1 — Criar conta</div>
-          <h2 class="section-title">Dados obrigatórios</h2>
-
-          <p><label>Nome completo *<br><input required name="nome" class="form-input"></label></p>
-          <p><label>E-mail *<br><input required type="email" name="email" class="form-input"></label></p>
-          <p><label>Senha *<br><input required type="password" name="senha" minlength="6" class="form-input"></label></p>
-          <p><label>Número de matrícula *<br><input required name="matricula" class="form-input"></label></p>
-          <p><label>Curso *<br><input required name="curso" class="form-input"></label></p>
-          <p><label>Ano de ingresso *<br><input required type="number" name="anoIngresso" min="1946" max="2100" class="form-input"></label></p>
-
-          <p>
-            <label>Situação acadêmica *<br>
-              <select required name="situacao" id="situacao" class="form-input">
-                <option value="">Selecione</option>
-                <option value="cursando">Ainda estou cursando</option>
-                <option value="concluido">Já concluí</option>
-              </select>
-            </label>
-          </p>
-
-          <p id="campo-ano-conclusao" style="display:none;">
-            <label>Ano de conclusão / egresso *<br><input type="number" name="anoConclusao" min="1946" max="2100" class="form-input"></label>
-          </p>
-
-          <hr style="margin:28px 0;border:none;border-top:1px solid var(--gray-200);">
-
-          <div class="section-label">Etapa 2 — Completar perfil</div>
-          <h2 class="section-title">Dados opcionais</h2>
-
-          <p><label>LinkedIn<br><input type="url" name="linkedin" placeholder="https://www.linkedin.com/in/seu-perfil" class="form-input"></label></p>
-          <p><label>Foto de perfil<br><input type="url" name="fotoUrl" placeholder="Cole o link da sua foto por enquanto" class="form-input"></label></p>
-          <p><label>Cidade atual<br><input name="cidade" class="form-input"></label></p>
-          <p><label>Estado atual<br><input name="estado" maxlength="2" placeholder="MG" class="form-input"></label></p>
-          <p><label>Área de atuação<br><input name="areaAtuacao" placeholder="Ex: Finanças, Tecnologia, Saúde" class="form-input"></label></p>
-          <p><label>Empresa atual<br><input name="empresaAtual" class="form-input"></label></p>
-          <p><label>Cargo atual<br><input name="cargoAtual" class="form-input"></label></p>
-          <p><label>Mini bio<br><textarea name="bio" rows="4" class="form-input" placeholder="Conte brevemente sua trajetória"></textarea></label></p>
-
-          <p><label><input required type="checkbox" name="aceiteTermos"> Aceito os termos de uso e a política de privacidade *</label></p>
-
-          <button class="btn btn-md btn-primary" type="submit">Criar minha conta</button>
-        </form>
-        <p id="mensagem" style="margin-top:16px;color:var(--ufjf-green);font-weight:600"></p>
-      </div>
-    </div>
-  </section>
-
-  <script src="../assets/js/main.js" defer></script>
-  <script type="module" src="../assets/js/auth.js"></script>
+  <header class="page-hero"><div class="page-hero-inner"><h1>Cadastro Alumni UFJF</h1><p>Crie seu perfil na rede Alumni UFJF. Esta primeira versão é um protótipo visual para validação das ideias e do fluxo da plataforma.</p></div></header>
+  <section><div class="container"><div class="placeholder-card"><form id="form-cadastro">
+    <div class="section-label">Etapa 1 — Criar conta</div><h2 class="section-title">Dados principais</h2>
+    <p><label>Nome completo *<br><input required name="nome" class="form-input"></label></p>
+    <p><label>E-mail *<br><input required type="email" name="email" class="form-input"></label></p>
+    <p><label>Senha *<br><input required type="password" name="senha" minlength="6" class="form-input"></label></p>
+    <p><label>Tipo de vínculo com a UFJF *<br><select required name="tipoVinculo" class="form-input"><option value="">Selecione</option><option value="estudante">Estudante</option><option value="egresso">Egresso</option><option value="professor">Professor</option><option value="tecnico">Técnico-administrativo</option><option value="pesquisador">Pesquisador</option><option value="parceiro">Parceiro institucional</option><option value="empresa">Empresa parceira</option><option value="comunidade">Comunidade externa</option></select></label></p>
+    <p><label>Número de matrícula / identificação institucional<br><input name="matricula" class="form-input"></label></p>
+    <p><label>Curso, unidade, setor ou instituição vinculada *<br><input required name="curso" class="form-input"></label></p>
+    <p><label>Ano de ingresso ou início do vínculo<br><input type="number" name="anoIngresso" min="1960" max="2100" class="form-input"></label></p>
+    <p><label>Situação atual<br><select name="situacao" id="situacao" class="form-input"><option value="">Selecione</option><option value="cursando">Vínculo ativo / cursando</option><option value="concluido">Vínculo concluído / egresso</option><option value="parceiro">Parceiro ou colaborador</option></select></label></p>
+    <p id="campo-ano-conclusao" style="display:none;"><label>Ano de conclusão / encerramento do vínculo<br><input type="number" name="anoConclusao" min="1960" max="2100" class="form-input"></label></p>
+    <hr style="margin:28px 0;border:none;border-top:1px solid var(--gray-200);">
+    <div class="section-label">Etapa 2 — Perfil Alumni</div><h2 class="section-title">Dados complementares</h2>
+    <p><label>LinkedIn<br><input type="url" name="linkedin" placeholder="https://www.linkedin.com/in/seu-perfil" class="form-input"></label></p>
+    <p><label>Foto de perfil<br><input type="url" name="fotoUrl" placeholder="Cole o link da sua foto por enquanto" class="form-input"></label></p>
+    <p><label>Cidade atual<br><input name="cidade" class="form-input"></label></p>
+    <p><label>Estado atual<br><input name="estado" maxlength="2" placeholder="MG" class="form-input"></label></p>
+    <p><label>Área de interesse ou atuação<br><input name="areaAtuacao" placeholder="Ex: Finanças, Tecnologia, Saúde, Pesquisa, Extensão" class="form-input"></label></p>
+    <p><label>Empresa, instituição ou projeto atual<br><input name="empresaAtual" class="form-input"></label></p>
+    <p><label>Cargo, função ou participação atual<br><input name="cargoAtual" class="form-input"></label></p>
+    <p><label>Mini bio<br><textarea name="bio" rows="4" class="form-input" placeholder="Conte brevemente sua trajetória ou vínculo com a UFJF"></textarea></label></p>
+    <hr style="margin:28px 0;border:none;border-top:1px solid var(--gray-200);">
+    <div class="section-label">Etapa 3 — Preferências</div><h2 class="section-title">Privacidade e participação</h2>
+    <p><label><input type="checkbox" name="aparecerNoMapa"> Quero aparecer no Mapa Alumni UFJF</label></p>
+    <p><label><input type="checkbox" name="aceitarContato"> Aceito ser contatado por outros membros da rede</label></p>
+    <p><label><input type="checkbox" name="receberOportunidades"> Quero receber oportunidades, editais e projetos</label></p>
+    <p><label><input type="checkbox" name="participarMentoria"> Tenho interesse em participar de mentorias</label></p>
+    <p><label><input type="checkbox" name="receberNewsletter"> Quero receber a newsletter Alumni UFJF</label></p>
+    <p><label><input required type="checkbox" name="aceiteTermos"> Aceito os termos de uso e a política de privacidade *</label></p>
+    <button class="btn btn-md btn-primary" type="submit">Criar minha conta</button>
+  </form><p id="mensagem" style="margin-top:16px;color:var(--ufjf-green);font-weight:600"></p></div></div></section>
+  <script src="../assets/js/main.js" defer></script><script type="module" src="../assets/js/auth.js"></script>
 </body>
 </html>
