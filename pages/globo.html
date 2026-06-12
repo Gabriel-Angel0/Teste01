@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Globo Alumni UFJF</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="https://unpkg.com/globe.gl"></script>
+  <style>
+    body{background:#050816;color:white;overflow-x:hidden}.globe-page{min-height:100vh;display:grid;grid-template-columns:360px 1fr 340px;gap:20px;padding:110px 28px 32px}.glass{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:28px;padding:24px;backdrop-filter:blur(14px);box-shadow:0 24px 60px rgba(0,0,0,.28)}.glass h1{font-family:'DM Serif Display',serif;font-size:46px;line-height:.95;margin:10px 0 16px}.glass p{color:rgba(255,255,255,.72);font-size:14px;line-height:1.65}.globe-wrap{min-height:620px;border-radius:32px;overflow:hidden;background:radial-gradient(circle at center,#13285a 0%,#050816 65%);border:1px solid rgba(255,255,255,.1);position:relative}.globe-label{position:absolute;left:24px;top:24px;z-index:2;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.12);padding:10px 14px;border-radius:999px;font-size:12px;font-weight:800}.city{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(255,255,255,.12);padding:14px 0}.city b{font-size:14px}.city span{color:rgba(255,255,255,.62);font-size:12px}.num{font-weight:800;color:#FFD166}.tagline{display:inline-flex;padding:7px 12px;border-radius:999px;background:rgba(255,209,102,.14);color:#FFD166;font-size:12px;font-weight:800}.actions{display:flex;flex-direction:column;gap:10px;margin-top:18px}.actions a{text-decoration:none;text-align:center}.mini-stat{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.mini-stat div{background:rgba(255,255,255,.08);border-radius:18px;padding:14px}.mini-stat strong{display:block;font-size:24px;color:#FFD166}.mini-stat span{font-size:11px;color:rgba(255,255,255,.62)}nav{background:rgba(5,8,22,.72);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)}.nav-links a,.nav-logo-text strong{color:white}.nav-logo-text span{color:rgba(255,255,255,.62)}@media(max-width:1100px){.globe-page{grid-template-columns:1fr;padding-top:100px}.globe-wrap{min-height:520px}}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../index.html" class="nav-logo"><div class="nav-logo-mark"></div><div class="nav-logo-text"><strong>Alumni UFJF</strong><span>Globo interativo</span></div></a>
+    <ul class="nav-links"><li><a href="mapa.html">Mapa</a></li><li><a href="comunidade.html">Comunidade</a></li><li><a href="inovacao.html">Inovação</a></li></ul>
+    <div class="nav-actions"><a href="cadastro.html" class="btn btn-sm btn-primary">Cadastre-se</a></div>
+  </nav>
+  <main class="globe-page">
+    <section class="glass">
+      <span class="tagline">🌎 Rede global UFJF</span>
+      <h1>Globo Alumni UFJF</h1>
+      <p>Visualização institucional da presença da comunidade Alumni UFJF no Brasil e no mundo. Esta versão usa dados demonstrativos e pode evoluir para dados agregados vindos do Firebase.</p>
+      <div class="mini-stat"><div><strong>8</strong><span>cidades demonstrativas</span></div><div><strong>341</strong><span>membros simulados</span></div><div><strong>5</strong><span>áreas principais</span></div><div><strong>3</strong><span>países</span></div></div>
+      <div class="actions"><a href="mapa.html" class="btn btn-md btn-ghost">Ver mapa tradicional</a><a href="inovacao.html" class="btn btn-md btn-gold">Ver roadmap</a></div>
+    </section>
+    <section class="globe-wrap"><div class="globe-label">Arraste, aproxime e clique nos pontos</div><div id="globeViz"></div></section>
+    <aside class="glass">
+      <h2>Ranking de presença</h2>
+      <p>Exemplo de como a plataforma pode mostrar dados agregados, sem expor endereço individual.</p>
+      <div id="cityList"></div>
+    </aside>
+  </main>
+  <script>
+    const cidades=[
+      {city:'Juiz de Fora',country:'Brasil',lat:-21.7642,lng:-43.3503,members:120,areas:'Ensino, pesquisa, extensão'},
+      {city:'São Paulo',country:'Brasil',lat:-23.5505,lng:-46.6333,members:82,areas:'Finanças, tecnologia, direito'},
+      {city:'Rio de Janeiro',country:'Brasil',lat:-22.9068,lng:-43.1729,members:54,areas:'Saúde, pesquisa, gestão'},
+      {city:'Belo Horizonte',country:'Brasil',lat:-19.9167,lng:-43.9345,members:41,areas:'Tecnologia, setor público'},
+      {city:'Brasília',country:'Brasil',lat:-15.7939,lng:-47.8828,members:18,areas:'Direito, setor público'},
+      {city:'Lisboa',country:'Portugal',lat:38.7223,lng:-9.1393,members:12,areas:'Pesquisa, educação'},
+      {city:'Londres',country:'Reino Unido',lat:51.5072,lng:-0.1276,members:8,areas:'Tecnologia, finanças'},
+      {city:'Nova York',country:'EUA',lat:40.7128,lng:-74.0060,members:6,areas:'Pesquisa, mercado'}
+    ];
+    const list=document.getElementById('cityList');
+    list.innerHTML=cidades.map(c=>`<div class="city"><div><b>${c.city}</b><br><span>${c.country} · ${c.areas}</span></div><div class="num">${c.members}</div></div>`).join('');
+    const globe=Globe()(document.getElementById('globeViz'))
+      .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+      .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+      .backgroundColor('rgba(0,0,0,0)')
+      .pointsData(cidades)
+      .pointLat(d=>d.lat)
+      .pointLng(d=>d.lng)
+      .pointAltitude(d=>0.05+d.members/1800)
+      .pointRadius(d=>0.45+Math.sqrt(d.members)/7)
+      .pointColor(()=> '#FFD166')
+      .pointLabel(d=>`<b>${d.city}, ${d.country}</b><br>${d.members} membros Alumni<br>${d.areas}`)
+      .arcsData(cidades.slice(1).map(c=>({startLat:-21.7642,startLng:-43.3503,endLat:c.lat,endLng:c.lng})))
+      .arcColor(()=> '#FFD166')
+      .arcDashLength(.35)
+      .arcDashGap(1)
+      .arcDashAnimateTime(2500)
+      .arcStroke(.45);
+    globe.controls().autoRotate=true;
+    globe.controls().autoRotateSpeed=.55;
+  </script>
+</body>
+</html>
