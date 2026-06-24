@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
   initSmoothScroll();
+  initCadastroDestino();
 });
 
 function initScrollAnimations() {
@@ -50,5 +51,23 @@ function initSmoothScroll() {
         block: 'start'
       });
     });
+  });
+}
+
+function initCadastroDestino() {
+  const form = document.getElementById('form-cadastro');
+  if (!form) return;
+
+  const path = document.location.pathname;
+  let destino = '';
+
+  if (path.includes('cadastro-placement.html')) destino = 'dashboard-placement.html';
+  if (path.includes('cadastro-alumni.html')) destino = 'dashboard-alumni.html';
+  if (path.includes('cadastro-parceiro.html')) destino = 'dashboard-parceiro.html';
+
+  if (!destino) return;
+
+  form.addEventListener('submit', () => {
+    sessionStorage.setItem('dashboardDestinoConexoesUfjf', destino);
   });
 }
