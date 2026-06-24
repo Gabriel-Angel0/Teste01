@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
   initSmoothScroll();
   initCadastroDestino();
+  initPosCadastro();
 });
 
 function initScrollAnimations() {
@@ -70,4 +71,18 @@ function initCadastroDestino() {
   form.addEventListener('submit', () => {
     sessionStorage.setItem('dashboardDestinoConexoesUfjf', destino);
   });
+}
+
+function initPosCadastro() {
+  const path = document.location.pathname;
+  if (!path.includes('perfil.html')) return;
+
+  const destino = sessionStorage.getItem('dashboardDestinoConexoesUfjf');
+  if (!destino) return;
+
+  sessionStorage.removeItem('dashboardDestinoConexoesUfjf');
+  const link = document.createElement('a');
+  link.href = destino;
+  document.body.appendChild(link);
+  link.click();
 }
