@@ -82,17 +82,49 @@ function initCadastroDestino() {
 
   if (!destino) return;
 
-  form.addEventListener('submit', () => {
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+
     garantirCamposCompatibilidade(form);
 
     const email = form.elements.email?.value?.trim().toLowerCase();
+    const mensagem = document.getElementById('mensagem');
 
     sessionStorage.setItem('dashboardDestinoConexoesUfjf', destino);
 
     if (email && tipo) {
       localStorage.setItem('conexoes_ufjf_tipo_' + email, tipo);
+      salvarCadastroPrototipo(form, tipo, email);
     }
+
+    if (mensagem) mensagem.textContent = 'Cadastro registrado com sucesso! Redirecionando...';
+
+    setTimeout(() => {
+      window.location.href = destino;
+    }, 700);
   }, true);
+}
+
+function salvarCadastroPrototipo(form, tipo, email) {
+  const dados = {
+    tipo,
+    email,
+    criadoEm: new Date().toISOString()
+  };
+
+  Array.from(form.elements).forEach(campo => {
+    if (!campo.name) return;
+    if (campo.type === 'password') return;
+    if (campo.type === 'checkbox') {
+      dados[campo.name] = campo.checked;
+    } else {
+      dados[campo.name] = campo.value;
+    }
+  });
+
+  const chave = 'conexoes_ufjf_cadastro_' + email;
+  localStorage.setItem(chave, JSON.stringify(dados));
 }
 
 function garantirCamposCompatibilidade(form) {
