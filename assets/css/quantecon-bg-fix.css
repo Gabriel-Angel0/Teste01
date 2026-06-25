@@ -1,0 +1,61 @@
+/* Correção pontual dos fundos da landing: remove verde-água/vinho e mantém azul quadriculado */
+
+/* Primeiro bloco / Hero */
+.hero,
+body .hero,
+main > .hero:first-child,
+section.hero:first-of-type {
+  background:
+    radial-gradient(circle at 88% 12%, rgba(25,87,255,.28) 0%, transparent 31%),
+    radial-gradient(circle at 18% 72%, rgba(47,191,255,.075) 0%, transparent 28%),
+    linear-gradient(rgba(47,191,255,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47,191,255,.055) 1px, transparent 1px),
+    linear-gradient(135deg, #030820 0%, #040a26 48%, #071247 100%) !important;
+  background-size: auto, auto, 72px 72px, 72px 72px, auto !important;
+  background-position: center !important;
+}
+
+.hero::before,
+body .hero::before {
+  background:
+    radial-gradient(circle at 78% 42%, transparent 0 8rem, rgba(47,191,255,.28) 8.05rem 8.18rem, transparent 8.25rem 10rem, rgba(25,87,255,.30) 10.05rem 10.18rem, transparent 10.25rem),
+    linear-gradient(90deg, transparent 0 60%, rgba(25,87,255,.075) 60% 60.4%, transparent 60.4%) !important;
+  opacity: .75 !important;
+}
+
+/* Segundo bloco / seção do globo */
+.hero + section,
+section.globe-section,
+section.map-section,
+section#globo,
+section#mapa,
+section[id*="globo"],
+section[id*="mapa"] {
+  background:
+    radial-gradient(circle at 72% 35%, rgba(47,191,255,.12) 0%, transparent 27%),
+    radial-gradient(circle at 12% 18%, rgba(25,87,255,.13) 0%, transparent 24%),
+    linear-gradient(rgba(47,191,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47,191,255,.05) 1px, transparent 1px),
+    linear-gradient(180deg, #040a26 0%, #061137 52%, #071247 100%) !important;
+  background-size: auto, auto, 72px 72px, 72px 72px, auto !important;
+  background-position: center !important;
+  border-top: 1px solid rgba(47,191,255,.20) !important;
+  border-bottom: 1px solid rgba(47,191,255,.18) !important;
+}
+
+/* Remove tons legados em containers internos dessas duas seções */
+.hero .container,
+.hero-inner,
+.hero + section .container,
+section.globe-section .container,
+section.map-section .container,
+section#globo .container,
+section#mapa .container {
+  background: transparent !important;
+}
+
+/* Caso algum bloco interno tenha recebido cor verde/teal por classe antiga */
+.hero [style*="background"],
+.hero + section [style*="background"] {
+  background-color: transparent;
+}
