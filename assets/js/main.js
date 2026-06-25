@@ -9,11 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
 function loadQuantEconTheme() {
   if (document.querySelector('link[data-quantecon-theme]')) return;
 
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.href = getAssetPrefix() + 'assets/css/quantecon-theme.css?v=1';
-  link.dataset.quanteconTheme = 'true';
-  document.head.appendChild(link);
+  const prefix = getAssetPrefix();
+
+  const theme = document.createElement('link');
+  theme.rel = 'stylesheet';
+  theme.href = prefix + 'assets/css/quantecon-theme.css?v=2';
+  theme.dataset.quanteconTheme = 'true';
+  document.head.appendChild(theme);
+
+  const bgFix = document.createElement('link');
+  bgFix.rel = 'stylesheet';
+  bgFix.href = prefix + 'assets/css/quantecon-bg-fix.css?v=1';
+  bgFix.dataset.quanteconBgFix = 'true';
+  document.head.appendChild(bgFix);
 }
 
 function getAssetPrefix() {
