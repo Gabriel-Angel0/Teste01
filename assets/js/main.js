@@ -61,16 +61,34 @@ function initCadastroDestino() {
 
   const path = document.location.pathname;
   let destino = '';
+  let tipo = '';
 
-  if (path.includes('cadastro-placement.html')) destino = 'dashboard-placement.html';
-  if (path.includes('cadastro-alumni.html')) destino = 'dashboard-alumni.html';
-  if (path.includes('cadastro-parceiro.html')) destino = 'dashboard-parceiro.html';
+  if (path.includes('cadastro-placement.html')) {
+    destino = 'dashboard-placement.html';
+    tipo = 'placement';
+  }
+
+  if (path.includes('cadastro-alumni.html')) {
+    destino = 'dashboard-alumni.html';
+    tipo = 'alumni';
+  }
+
+  if (path.includes('cadastro-parceiro.html')) {
+    destino = 'dashboard-parceiro.html';
+    tipo = 'parceiro';
+  }
 
   if (!destino) return;
 
   form.addEventListener('submit', () => {
+    const email = form.elements.email?.value?.trim().toLowerCase();
+
     sessionStorage.setItem('dashboardDestinoConexoesUfjf', destino);
-  });
+
+    if (email && tipo) {
+      localStorage.setItem('conexoes_ufjf_tipo_' + email, tipo);
+    }
+  }, true);
 }
 
 function initPosCadastro() {
