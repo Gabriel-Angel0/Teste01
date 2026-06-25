@@ -324,6 +324,75 @@ footer {
   color: var(--qe-muted) !important;
 }
 
+/* Landing page color correction: remove legacy green/teal blocks and use QuantEcon palette */
+.hero + section,
+.hero + section + section,
+.hero + section + section + section,
+section.cta,
+.cta,
+.cta-section,
+.join-section,
+.network-section,
+.caminhos-section,
+.escolha-section,
+[class*="cta"],
+[class*="join"],
+[class*="rede"],
+[class*="network"] {
+  background:
+    radial-gradient(circle at 88% 12%, rgba(25,87,255,.30), transparent 22rem),
+    radial-gradient(circle at 10% 80%, rgba(47,191,255,.10), transparent 18rem),
+    linear-gradient(rgba(47,191,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47,191,255,.045) 1px, transparent 1px),
+    linear-gradient(135deg, #071247 0%, #061137 48%, #040a26 100%) !important;
+  background-size: auto, auto, 72px 72px, 72px 72px, auto !important;
+  border-top: 1px solid rgba(47,191,255,.22) !important;
+  border-bottom: 1px solid rgba(47,191,255,.22) !important;
+  color: var(--qe-text) !important;
+}
+
+.hero + section {
+  background:
+    radial-gradient(circle at 80% 20%, rgba(47,191,255,.13), transparent 20rem),
+    linear-gradient(rgba(47,191,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47,191,255,.04) 1px, transparent 1px),
+    linear-gradient(180deg, #061137 0%, #071a45 100%) !important;
+  background-size: auto, 72px 72px, 72px 72px, auto !important;
+}
+
+.hero + section + section,
+.hero + section + section + section,
+.cta,
+.cta-section,
+.join-section,
+.network-section {
+  border-radius: 0 !important;
+  margin: 0 !important;
+}
+
+.hero + section + section .container,
+.hero + section + section + section .container,
+.cta .container,
+.cta-section .container,
+.join-section .container,
+.network-section .container {
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+.hero-stat,
+.stat-card,
+.stats-card,
+.metric-card,
+.hero-stat-grid > *,
+[class*="stat"],
+[class*="metric"] {
+  background: rgba(7, 20, 82, .74) !important;
+  border: 1px solid rgba(47,191,255,.34) !important;
+  border-radius: 0 !important;
+  box-shadow: inset 0 1px 0 rgba(112,214,255,.08), 0 0 24px rgba(25,87,255,.10) !important;
+}
+
 @media (max-width: 900px) {
   body::before, body::after { opacity: .45; }
   .hero { min-height: auto; }
