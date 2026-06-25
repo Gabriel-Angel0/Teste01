@@ -1,29 +1,53 @@
 /* Correção pontual dos fundos da landing: remove verde-água/vinho e mantém azul quadriculado */
 
-/* Primeiro bloco / Hero */
+/* Primeiro bloco / Hero real da página inicial */
+.gateway-hero,
+body .gateway-hero,
+header.gateway-hero,
 .hero,
 body .hero,
 main > .hero:first-child,
 section.hero:first-of-type {
   background:
-    radial-gradient(circle at 88% 12%, rgba(25,87,255,.28) 0%, transparent 31%),
-    radial-gradient(circle at 18% 72%, rgba(47,191,255,.075) 0%, transparent 28%),
-    linear-gradient(rgba(47,191,255,.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(47,191,255,.055) 1px, transparent 1px),
-    linear-gradient(135deg, #030820 0%, #040a26 48%, #071247 100%) !important;
+    radial-gradient(circle at 86% 13%, rgba(25,87,255,.30) 0%, transparent 30%),
+    radial-gradient(circle at 18% 72%, rgba(47,191,255,.07) 0%, transparent 30%),
+    linear-gradient(rgba(47,191,255,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47,191,255,.06) 1px, transparent 1px),
+    linear-gradient(135deg, #030820 0%, #040a26 52%, #071247 100%) !important;
   background-size: auto, auto, 72px 72px, 72px 72px, auto !important;
   background-position: center !important;
+  border-bottom: 1px solid rgba(47,191,255,.18) !important;
 }
 
+.gateway-hero::before,
 .hero::before,
 body .hero::before {
   background:
-    radial-gradient(circle at 78% 42%, transparent 0 8rem, rgba(47,191,255,.28) 8.05rem 8.18rem, transparent 8.25rem 10rem, rgba(25,87,255,.30) 10.05rem 10.18rem, transparent 10.25rem),
-    linear-gradient(90deg, transparent 0 60%, rgba(25,87,255,.075) 60% 60.4%, transparent 60.4%) !important;
-  opacity: .75 !important;
+    radial-gradient(circle at 78% 42%, transparent 0 8rem, rgba(47,191,255,.26) 8.05rem 8.18rem, transparent 8.25rem 10rem, rgba(25,87,255,.28) 10.05rem 10.18rem, transparent 10.25rem),
+    linear-gradient(90deg, transparent 0 60%, rgba(25,87,255,.07) 60% 60.4%, transparent 60.4%) !important;
+  opacity: .72 !important;
 }
 
-/* Segundo bloco / seção do globo */
+/* Cards do primeiro bloco: remove teal/dourado e padroniza em azul profundo */
+.gateway-hero .path-card,
+.gateway-hero .path-card.student,
+.gateway-hero .path-card.alumni,
+.gateway-hero .path-card.partner,
+.gateway-hero .gateway-stat {
+  background:
+    linear-gradient(rgba(47,191,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47,191,255,.045) 1px, transparent 1px),
+    linear-gradient(145deg, rgba(7,20,82,.96), rgba(11,27,105,.90)) !important;
+  background-size: 36px 36px, 36px 36px, auto !important;
+  border: 1px solid rgba(47,191,255,.38) !important;
+  box-shadow: inset 0 1px 0 rgba(112,214,255,.08), 0 28px 70px rgba(0,0,0,.26) !important;
+  border-radius: 0 !important;
+}
+
+/* Segundo bloco / seção do globo real da página inicial */
+.map-section,
+body .map-section,
+div.map-section,
 .hero + section,
 section.globe-section,
 section.map-section,
@@ -32,20 +56,32 @@ section#mapa,
 section[id*="globo"],
 section[id*="mapa"] {
   background:
-    radial-gradient(circle at 72% 35%, rgba(47,191,255,.12) 0%, transparent 27%),
-    radial-gradient(circle at 12% 18%, rgba(25,87,255,.13) 0%, transparent 24%),
-    linear-gradient(rgba(47,191,255,.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(47,191,255,.05) 1px, transparent 1px),
-    linear-gradient(180deg, #040a26 0%, #061137 52%, #071247 100%) !important;
+    radial-gradient(circle at 72% 35%, rgba(47,191,255,.10) 0%, transparent 28%),
+    radial-gradient(circle at 16% 22%, rgba(25,87,255,.12) 0%, transparent 26%),
+    linear-gradient(rgba(47,191,255,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47,191,255,.055) 1px, transparent 1px),
+    linear-gradient(180deg, #040a26 0%, #061137 56%, #071247 100%) !important;
   background-size: auto, auto, 72px 72px, 72px 72px, auto !important;
   background-position: center !important;
-  border-top: 1px solid rgba(47,191,255,.20) !important;
+  border-top: 1px solid rgba(47,191,255,.18) !important;
   border-bottom: 1px solid rgba(47,191,255,.18) !important;
 }
 
+.map-section .map-placeholder {
+  background:
+    radial-gradient(circle at 50% 18%, rgba(47,191,255,.11), transparent 42%),
+    linear-gradient(145deg, rgba(7,20,82,.82), rgba(4,10,38,.68)) !important;
+  border: 1px solid rgba(47,191,255,.32) !important;
+  border-radius: 0 !important;
+}
+
 /* Remove tons legados em containers internos dessas duas seções */
+.gateway-hero .container,
+.gateway-inner,
 .hero .container,
 .hero-inner,
+.map-section .container,
+.map-section .map-inner,
 .hero + section .container,
 section.globe-section .container,
 section.map-section .container,
@@ -55,7 +91,9 @@ section#mapa .container {
 }
 
 /* Caso algum bloco interno tenha recebido cor verde/teal por classe antiga */
+.gateway-hero [style*="background"],
 .hero [style*="background"],
+.map-section [style*="background"],
 .hero + section [style*="background"] {
   background-color: transparent;
 }
