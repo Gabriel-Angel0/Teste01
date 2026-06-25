@@ -3,127 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meu Perfil - Alumni UFJF</title>
+  <title>Redirecionando - Conexões UFJF</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
   <style>
-    body { background: #f6f7f4; }
-    .member-hero { padding: 42px 32px 120px; background: radial-gradient(circle at 85% 10%, rgba(255,217,0,.18), transparent 26%), linear-gradient(135deg, #07151B 0%, #003A52 54%, #005E83 100%); color: white; }
-    .member-hero-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; }
-    .member-hero h1 { font-family: 'DM Serif Display', serif; font-size: 42px; line-height: 1.08; margin-bottom: 10px; }
-    .member-hero p { max-width: 620px; color: rgba(255,255,255,.76); }
-    .member-shell { max-width: 1100px; margin: -86px auto 0; padding: 0 32px 72px; }
-    .member-dashboard { display: grid; grid-template-columns: 340px 1fr; gap: 22px; align-items: start; }
-    .glass-card, .member-card { background: rgba(255,255,255,.96); border: 1px solid rgba(255,255,255,.7); border-radius: 26px; box-shadow: 0 18px 50px rgba(15,23,42,.10); }
-    .profile-main { padding: 26px; position: sticky; top: 84px; }
-    .member-avatar { width: 104px; height: 104px; border-radius: 28px; background: linear-gradient(135deg, var(--ufjf-blue-light), white); color: var(--brand-primary); display: flex; align-items: center; justify-content: center; font-size: 34px; font-weight: 800; margin-bottom: 18px; border: 1px solid var(--gray-200); }
-    .member-name { font-size: 26px; letter-spacing: -.03em; color: var(--gray-900); margin-bottom: 4px; }
-    .member-subtitle { font-size: 14px; color: var(--gray-600); margin-bottom: 12px; }
-    .member-status { display: inline-flex; padding: 6px 11px; border-radius: 999px; background: var(--ufjf-blue-light); color: var(--brand-primary); font-size: 12px; font-weight: 800; margin-bottom: 18px; }
-    .member-bio { font-size: 14px; color: var(--gray-600); line-height: 1.7; margin: 6px 0 18px; }
-    .member-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
-    .quick-nav { display: grid; gap: 10px; margin-top: 22px; }
-    .quick-nav a { text-decoration: none; border: 1px solid var(--gray-200); border-radius: 16px; padding: 14px; color: var(--gray-700); font-size: 13px; font-weight: 700; background: var(--gray-50); display: flex; justify-content: space-between; align-items: center; }
-    .quick-nav a:hover { background: var(--ufjf-blue-light); color: var(--brand-primary); border-color: rgba(0,94,131,.22); }
-    .dashboard-main { display: grid; gap: 18px; }
-    .profile-tabs { display: inline-flex; gap: 8px; padding: 6px; border-radius: 999px; background: rgba(255,255,255,.85); border: 1px solid var(--gray-200); width: fit-content; }
-    .profile-tab { border: 0; cursor: pointer; border-radius: 999px; padding: 10px 16px; background: transparent; font-family: inherit; font-weight: 800; font-size: 13px; color: var(--gray-600); }
-    .profile-tab.active { background: var(--brand-primary); color: white; box-shadow: 0 6px 20px rgba(0,94,131,.22); }
-    .tab-panel { display: none; }
-    .tab-panel.active { display: grid; gap: 18px; }
-    .welcome-card { padding: 24px; display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; }
-    .welcome-card h2 { font-size: 20px; color: var(--gray-900); margin-bottom: 6px; }
-    .welcome-card p { color: var(--gray-600); font-size: 14px; }
-    .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .mini-stat { padding: 18px; border-radius: 22px; background: white; border: 1px solid var(--gray-200); box-shadow: var(--shadow-sm); }
-    .mini-stat span { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--gray-500); font-weight: 800; display: block; margin-bottom: 8px; }
-    .mini-stat strong { font-size: 22px; color: var(--brand-primary); overflow-wrap: anywhere; }
-    .member-card { padding: 24px; }
-    .member-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .info-box { border: 1px solid var(--gray-200); border-radius: 18px; padding: 16px; background: var(--gray-50); }
-    .info-box span { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--gray-500); margin-bottom: 7px; font-weight: 800; }
-    .info-box strong { font-size: 15px; color: var(--gray-900); overflow-wrap: anywhere; }
-    .preference-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 14px; }
-    .preference-item { border: 1px solid var(--gray-200); border-radius: 18px; padding: 15px; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: white; }
-    .preference-item strong { font-size: 13px; color: var(--gray-800); }
-    .status-pill { font-size: 11px; padding: 5px 10px; border-radius: 999px; font-weight: 800; }
-    .status-on { background: var(--ufjf-green-light); color: var(--ufjf-green); }
-    .status-off { background: var(--gray-100); color: var(--gray-500); }
-    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .feature-card { padding: 18px; border: 1px solid var(--gray-200); border-radius: 22px; background: white; text-decoration: none; color: inherit; }
-    .feature-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: rgba(0,94,131,.25); }
-    .feature-card b { display: block; color: var(--gray-900); margin: 8px 0 4px; }
-    .feature-card span { font-size: 12px; color: var(--gray-600); }
-    .profile-section-title { font-size: 18px; margin: 0 0 16px; color: var(--gray-900); }
-    #perfil-conteudo, #perfil-erro { display: none; }
-    @media (max-width: 900px) { .member-hero-inner, .welcome-card { display:block; } .member-dashboard { grid-template-columns: 1fr; } .profile-main { position: static; } .member-grid, .preference-grid, .feature-grid, .stats-row { grid-template-columns: 1fr; } .member-shell { padding: 0 20px 52px; } .profile-tabs { width: 100%; } .profile-tab { flex: 1; } }
+    body{min-height:100vh;background:radial-gradient(circle at 15% 10%,rgba(0,132,178,.32),transparent 28%),radial-gradient(circle at 85% 8%,rgba(255,207,64,.18),transparent 25%),linear-gradient(135deg,#050b18 0%,#071827 48%,#051b18 100%);color:white;display:flex;align-items:center;justify-content:center;padding:24px}.redirect-card{max-width:680px;background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.065));border:1px solid rgba(255,255,255,.17);border-radius:34px;padding:38px;box-shadow:0 28px 90px rgba(0,0,0,.38);backdrop-filter:blur(20px);text-align:center}.redirect-card h1{font-family:'DM Serif Display',serif;font-size:42px;margin-bottom:12px}.redirect-card p{color:#dbeafe;line-height:1.7}.redirect-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:22px}
   </style>
 </head>
 <body>
-  <nav>
-    <a href="../index.html" class="nav-logo"><div class="nav-logo-mark"></div><div class="nav-logo-text"><strong>Alumni UFJF</strong><span>Área de membros</span></div></a>
-    <ul class="nav-links"><li><a href="mapa.html">Mapa</a></li><li><a href="vagas.html">Vagas</a></li><li><a href="eventos.html">Eventos</a></li><li><a href="comunidade.html">Comunidade</a></li></ul>
-    <div class="nav-actions"><button id="btn-sair" class="btn btn-sm btn-outline" type="button">Sair</button></div>
-  </nav>
-
-  <header class="member-hero">
-    <div class="member-hero-inner">
-      <div><div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span>Área Alumni UFJF</div><h1>Bem-vindo à sua rede de egressos</h1><p>Atualize seu perfil, controle sua privacidade e acesse oportunidades, eventos, mentoria e o mapa da comunidade Alumni.</p></div>
-      <a href="../index.html" class="btn btn-md btn-ghost">Voltar ao site</a>
-    </div>
-  </header>
-
-  <main class="member-shell">
-    <p id="perfil-loading" class="placeholder-card">Carregando seu perfil...</p>
-    <p id="perfil-erro" class="placeholder-card" style="color:var(--ufjf-red);font-weight:700;"></p>
-
-    <div id="perfil-conteudo" class="member-dashboard">
-      <aside class="glass-card profile-main">
-        <div id="perfil-avatar" class="member-avatar">AU</div>
-        <h2 id="perfil-nome" class="member-name">Egresso UFJF</h2>
-        <p id="perfil-curso" class="member-subtitle">Curso</p>
-        <span id="perfil-status" class="member-status">Verificação pendente</span>
-        <p id="perfil-bio" class="member-bio">Bio</p>
-        <div class="member-actions"><a id="perfil-linkedin" class="btn btn-sm btn-primary" href="#" target="_blank" rel="noopener">LinkedIn</a></div>
-        <div class="quick-nav"><a href="mapa.html">🌍 Mapa de egressos <span>→</span></a><a href="vagas.html">💼 Oportunidades <span>→</span></a><a href="eventos.html">📅 Eventos <span>→</span></a><a href="comunidade.html">👥 Comunidade <span>→</span></a></div>
-      </aside>
-
-      <div class="dashboard-main">
-        <div class="profile-tabs"><button class="profile-tab active" data-tab="overview" type="button">Visão geral</button><button id="btn-editar" class="profile-tab" data-tab="edit" type="button">Editar perfil</button></div>
-        <section id="perfil-visualizacao" class="tab-panel active">
-          <div class="glass-card welcome-card"><div><h2>Resumo do perfil</h2><p>Mantenha seus dados atualizados para melhorar sua presença na rede Alumni UFJF.</p></div><button id="btn-editar-hero" class="btn btn-md btn-primary" type="button">Atualizar dados</button></div>
-          <div class="stats-row"><div class="mini-stat"><span>Localização</span><strong id="perfil-localizacao">—</strong></div><div class="mini-stat"><span>Área</span><strong id="perfil-area">—</strong></div><div class="mini-stat"><span>Conclusão</span><strong id="perfil-conclusao">—</strong></div></div>
-          <section class="member-card"><h2 class="profile-section-title">Dados acadêmicos e profissionais</h2><div class="member-grid"><div class="info-box"><span>E-mail</span><strong id="perfil-email">—</strong></div><div class="info-box"><span>Matrícula</span><strong id="perfil-matricula">—</strong></div><div class="info-box"><span>Ano de ingresso</span><strong id="perfil-ingresso">—</strong></div><div class="info-box"><span>Empresa atual</span><strong id="perfil-empresa">—</strong></div><div class="info-box"><span>Cargo atual</span><strong id="perfil-cargo">—</strong></div></div></section>
-          <section class="member-card"><h2 class="profile-section-title">Privacidade e participação</h2><div class="preference-grid"><div class="preference-item"><strong>Aparecer no mapa</strong><span id="pref-mapa" class="status-pill">—</span></div><div class="preference-item"><strong>Aceitar contato</strong><span id="pref-contato" class="status-pill">—</span></div><div class="preference-item"><strong>Receber oportunidades</strong><span id="pref-oportunidades" class="status-pill">—</span></div><div class="preference-item"><strong>Participar de mentoria</strong><span id="pref-mentoria" class="status-pill">—</span></div><div class="preference-item"><strong>Newsletter Alumni</strong><span id="pref-newsletter" class="status-pill">—</span></div></div></section>
-          <section class="member-card"><h2 class="profile-section-title">Acesse a plataforma</h2><div class="feature-grid"><a class="feature-card" href="mapa.html">🌍<b>Mapa Alumni</b><span>Encontre egressos por cidade e área.</span></a><a class="feature-card" href="vagas.html">💼<b>Vagas</b><span>Veja oportunidades para sua área.</span></a><a class="feature-card" href="eventos.html">📅<b>Eventos</b><span>Acompanhe encontros e palestras.</span></a></div></section>
-        </section>
-
-        <section id="perfil-edicao" class="tab-panel member-card">
-          <h2 class="profile-section-title">Editar perfil</h2>
-          <form id="form-perfil">
-            <div class="member-grid"><label>Nome completo<input name="nome" class="form-input" required></label><label>Curso<input name="curso" class="form-input" required></label><label>Matrícula<input name="matricula" class="form-input" required></label><label>Ano de ingresso<input name="anoIngresso" type="number" class="form-input"></label><label>Ano de conclusão<input name="anoConclusao" type="number" class="form-input"></label><label>LinkedIn<input name="linkedin" type="url" class="form-input"></label><label>Foto URL<input name="fotoUrl" type="url" class="form-input"></label><label>Cidade<input name="cidade" class="form-input"></label><label>Estado<input name="estado" class="form-input" maxlength="2"></label><label>Área de atuação<input name="areaAtuacao" class="form-input"></label><label>Empresa atual<input name="empresaAtual" class="form-input"></label><label>Cargo atual<input name="cargoAtual" class="form-input"></label></div>
-            <label>Mini bio<textarea name="bio" rows="4" class="form-input"></textarea></label>
-            <div class="preference-grid"><label class="preference-item"><strong>Aparecer no mapa</strong><input type="checkbox" name="aparecerNoMapa"></label><label class="preference-item"><strong>Aceitar contato</strong><input type="checkbox" name="aceitarContato"></label><label class="preference-item"><strong>Receber oportunidades</strong><input type="checkbox" name="receberOportunidades"></label><label class="preference-item"><strong>Participar de mentoria</strong><input type="checkbox" name="participarMentoria"></label><label class="preference-item"><strong>Newsletter Alumni</strong><input type="checkbox" name="receberNewsletter"></label></div>
-            <div class="member-actions"><button id="btn-salvar" class="btn btn-md btn-primary" type="submit">Salvar alterações</button><button class="btn btn-md btn-outline" data-tab="overview" type="button">Cancelar</button></div>
-          </form>
-        </section>
-      </div>
+  <main class="redirect-card">
+    <h1>Redirecionando...</h1>
+    <p>Estamos abrindo a área correta da plataforma Conexões UFJF.</p>
+    <div class="redirect-actions">
+      <a class="btn btn-sm btn-primary" href="dashboard-placement.html">Área Placement</a>
+      <a class="btn btn-sm btn-primary" href="dashboard-alumni.html">Área Alumni</a>
+      <a class="btn btn-sm btn-primary" href="dashboard-parceiro.html">Área Parceiro</a>
     </div>
   </main>
 
-  <script type="module" src="../assets/js/perfil.js"></script>
   <script>
-    function abrirAbaPerfil(tab) {
-      document.querySelectorAll('.profile-tab').forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tab));
-      document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.toggle('active', panel.id === (tab === 'edit' ? 'perfil-edicao' : 'perfil-visualizacao')));
+    const destino = sessionStorage.getItem('dashboardDestinoConexoesUfjf');
+    if (destino) {
+      sessionStorage.removeItem('dashboardDestinoConexoesUfjf');
+      window.location.replace(destino);
+    } else {
+      setTimeout(() => window.location.replace('dashboard-alumni.html'), 900);
     }
-    document.addEventListener('click', function(e) {
-      const tab = e.target?.dataset?.tab;
-      if (tab) abrirAbaPerfil(tab);
-      if (e.target && e.target.id === 'btn-editar-hero') abrirAbaPerfil('edit');
-    });
   </script>
 </body>
 </html>
