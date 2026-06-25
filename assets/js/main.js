@@ -59,6 +59,8 @@ function initCadastroDestino() {
   const form = document.getElementById('form-cadastro');
   if (!form) return;
 
+  garantirCamposCompatibilidade(form);
+
   const path = document.location.pathname;
   let destino = '';
   let tipo = '';
@@ -81,6 +83,8 @@ function initCadastroDestino() {
   if (!destino) return;
 
   form.addEventListener('submit', () => {
+    garantirCamposCompatibilidade(form);
+
     const email = form.elements.email?.value?.trim().toLowerCase();
 
     sessionStorage.setItem('dashboardDestinoConexoesUfjf', destino);
@@ -89,6 +93,45 @@ function initCadastroDestino() {
       localStorage.setItem('conexoes_ufjf_tipo_' + email, tipo);
     }
   }, true);
+}
+
+function garantirCamposCompatibilidade(form) {
+  const camposObrigatoriosParaAuthAntigo = {
+    matricula: '',
+    curso: '',
+    anoIngresso: '',
+    situacao: '',
+    anoConclusao: '',
+    linkedin: '',
+    fotoUrl: '',
+    cidade: '',
+    estado: '',
+    areaAtuacao: '',
+    empresaAtual: '',
+    cargoAtual: '',
+    bio: ''
+  };
+
+  Object.entries(camposObrigatoriosParaAuthAntigo).forEach(([nome, valor]) => {
+    if (form.elements[nome]) return;
+
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = nome;
+    input.value = valor;
+    form.appendChild(input);
+  });
+
+  if (form.elements.tipoVinculo && !form.elements.situacao.value) {
+    const tipo = form.elements.tipoVinculo.value;
+    form.elements.situacao.value = tipo === 'placement' ? 'cursando' : tipo === 'parceiro' ? 'parceiro' : 'concluido';
+  }
+
+  if (form.elements.tipoVinculo?.value === 'parceiro') {
+    if (!form.elements.anoIngresso.value) form.elements.anoIngresso.value = new Date().getFullYear();
+    if (!form.elements.curso.value) form.elements.curso.value = 'Parceiro externo';
+    if (!form.elements.matricula.value) form.elements.matricula.value = 'Parceiro externo';
+  }
 }
 
 function initPosCadastro() {
