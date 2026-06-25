@@ -1,0 +1,298 @@
+/* QuantEcon visual system inspired by the Semana QuantEcon slide template */
+:root {
+  --qe-bg: #040a26;
+  --qe-bg-2: #071247;
+  --qe-panel: #071452;
+  --qe-panel-2: #0b1b69;
+  --qe-blue: #1957ff;
+  --qe-cyan: #2fbfff;
+  --qe-cyan-2: #70d6ff;
+  --qe-text: #f5f7ff;
+  --qe-muted: #a8b3d6;
+  --qe-border: rgba(47,191,255,.42);
+  --qe-grid: rgba(47,191,255,.075);
+  --brand-primary: var(--qe-cyan);
+  --brand-primary-dark: #0b2fbf;
+  --brand-accent: var(--qe-blue);
+  --brand-highlight: var(--qe-cyan);
+  --gray-50: #040a26;
+  --gray-100: #071247;
+  --gray-200: rgba(47,191,255,.20);
+  --gray-300: rgba(47,191,255,.32);
+  --gray-500: #8f9bc4;
+  --gray-600: #a8b3d6;
+  --gray-700: #dce6ff;
+  --gray-800: #edf4ff;
+  --gray-900: #ffffff;
+}
+
+html { background: var(--qe-bg); }
+body {
+  background:
+    radial-gradient(circle at 92% 8%, rgba(25,87,255,.40) 0 13rem, transparent 13.2rem),
+    radial-gradient(circle at 72% 68%, rgba(47,191,255,.08), transparent 22rem),
+    linear-gradient(rgba(47,191,255,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47,191,255,.055) 1px, transparent 1px),
+    var(--qe-bg) !important;
+  background-size: auto, auto, 72px 72px, 72px 72px, auto !important;
+  color: var(--qe-text) !important;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 92% 8%, rgba(25,87,255,.92) 0 120px, transparent 121px),
+    linear-gradient(90deg, transparent 0 96%, rgba(47,191,255,.22) 96% 96.4%, transparent 96.4%),
+    radial-gradient(circle at 18% 24%, rgba(47,191,255,.10), transparent 20rem);
+  opacity: .96;
+}
+
+body::after {
+  content: "Q";
+  position: fixed;
+  right: 46px;
+  top: 88px;
+  width: 74px;
+  height: 74px;
+  border: 1px solid rgba(47,191,255,.54);
+  border-radius: 50%;
+  color: transparent;
+  pointer-events: none;
+  z-index: -1;
+  box-shadow: 0 0 60px rgba(47,191,255,.12);
+}
+
+nav {
+  background: rgba(3, 8, 32, .86) !important;
+  border-bottom: 1px solid rgba(47,191,255,.18) !important;
+  backdrop-filter: blur(16px) !important;
+  color: var(--qe-text) !important;
+}
+
+.nav-logo-mark {
+  background: linear-gradient(135deg, var(--qe-blue), var(--qe-cyan)) !important;
+  border-radius: 2px !important;
+  box-shadow: 0 0 24px rgba(47,191,255,.28);
+}
+
+.nav-logo-text strong,
+.nav-links a,
+.nav-logo-text span { color: var(--qe-text) !important; }
+.nav-logo-text span { color: var(--qe-muted) !important; }
+.nav-links a:hover { background: rgba(25,87,255,.20) !important; color: var(--qe-cyan) !important; }
+
+.hero,
+.page-hero,
+.member-hero,
+.login-page,
+.page-register,
+[class*="dashboard"],
+main,
+section {
+  background-color: transparent !important;
+}
+
+.hero {
+  min-height: 720px;
+  padding-top: 110px !important;
+  background:
+    radial-gradient(circle at 91% 2%, rgba(25,87,255,.88) 0 160px, transparent 162px),
+    linear-gradient(rgba(47,191,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47,191,255,.05) 1px, transparent 1px),
+    #040a26 !important;
+  background-size: auto, 72px 72px, 72px 72px, auto !important;
+}
+.hero::before {
+  background:
+    linear-gradient(90deg, transparent 0 60%, rgba(25,87,255,.09) 60% 61%, transparent 61%),
+    radial-gradient(circle at 78% 42%, transparent 0 8rem, rgba(47,191,255,.36) 8.05rem 8.25rem, transparent 8.3rem 10rem, rgba(25,87,255,.42) 10.05rem 10.18rem, transparent 10.25rem) !important;
+  opacity: .95;
+}
+.hero::after { display: none !important; }
+
+.hero h1,
+.page-hero h1,
+.register-top h1,
+.login-hero h1,
+.member-hero h1,
+.section-title,
+h1, h2, h3 {
+  color: var(--qe-text) !important;
+  letter-spacing: -0.04em;
+}
+
+.hero h1,
+.page-hero h1,
+.register-top h1,
+.login-hero h1 {
+  font-family: 'Sora', sans-serif !important;
+  font-weight: 800 !important;
+  font-size: clamp(48px, 7vw, 108px) !important;
+  line-height: .92 !important;
+}
+
+.hero h1 em,
+.hero-eyebrow,
+.section-label,
+.pill,
+.section-label,
+.card-kicker {
+  color: var(--qe-cyan) !important;
+}
+
+.hero-desc,
+.section-desc,
+p,
+li,
+span,
+small,
+label { color: var(--qe-muted) !important; }
+
+.hero-desc,
+.section-desc { font-size: 17px !important; }
+
+.hero-card,
+.benefit-card,
+.panel-card,
+.placeholder-card,
+.glass-card,
+.member-card,
+.login-card,
+.side-card,
+.steps-panel,
+.modern-form,
+.block,
+.card,
+.audience-option,
+.info-box,
+.feature-card,
+.mini-stat,
+.preference-item,
+[class*="card"] {
+  background: rgba(7, 20, 82, .78) !important;
+  border: 1px solid var(--qe-border) !important;
+  border-radius: 0 !important;
+  box-shadow: inset 0 1px 0 rgba(112,214,255,.08), 0 0 0 1px rgba(25,87,255,.12), 0 28px 80px rgba(0,0,0,.24) !important;
+  backdrop-filter: blur(10px) !important;
+  color: var(--qe-text) !important;
+}
+
+.hero-card::before,
+.benefit-card::before,
+.panel-card::before,
+.member-card::before,
+.modern-form::before,
+.block::before {
+  content: "";
+  display: block;
+  height: 5px;
+  width: 34%;
+  min-width: 150px;
+  background: linear-gradient(90deg, var(--qe-blue), var(--qe-cyan));
+  margin: -1px 0 24px;
+}
+
+.benefit-card:hover,
+.panel-card:hover,
+.feature-card:hover,
+.audience-option:hover {
+  border-color: var(--qe-cyan) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 0 0 1px rgba(47,191,255,.55), 0 0 36px rgba(47,191,255,.12) !important;
+}
+
+.btn-primary,
+.btn-green,
+.btn-gold,
+button[type="submit"] {
+  background: linear-gradient(135deg, var(--qe-blue), var(--qe-cyan)) !important;
+  color: #fff !important;
+  border: 1px solid rgba(112,214,255,.60) !important;
+  border-radius: 0 !important;
+  box-shadow: 0 0 26px rgba(25,87,255,.22) !important;
+  font-weight: 800 !important;
+}
+
+.btn-outline,
+.btn-ghost,
+.btn-white-green {
+  background: rgba(7, 20, 82, .45) !important;
+  color: var(--qe-text) !important;
+  border: 1px solid var(--qe-border) !important;
+  border-radius: 0 !important;
+}
+
+.btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+.form-input,
+input,
+select,
+textarea {
+  background: rgba(3, 8, 32, .78) !important;
+  color: var(--qe-text) !important;
+  border: 1px solid rgba(47,191,255,.34) !important;
+  border-radius: 0 !important;
+}
+.form-input:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid rgba(47,191,255,.35) !important;
+  border-color: var(--qe-cyan) !important;
+}
+
+.hero-stat-num,
+.mini-stat strong,
+.event-date-day,
+strong,
+b { color: var(--qe-text) !important; }
+
+.badge,
+.hero-badge,
+.member-status,
+.status-pill,
+.section-label,
+.pill {
+  background: rgba(25,87,255,.24) !important;
+  border: 1px solid rgba(47,191,255,.42) !important;
+  color: var(--qe-cyan) !important;
+  border-radius: 0 !important;
+}
+
+section { border-color: rgba(47,191,255,.14) !important; }
+.section-white-bordered { background: rgba(4,10,38,.52) !important; }
+
+.section-head::after,
+.section-title::after {
+  content: "";
+  display: block;
+  width: 260px;
+  max-width: 55vw;
+  height: 5px;
+  margin-top: 18px;
+  background: linear-gradient(90deg, var(--qe-blue), var(--qe-cyan));
+}
+
+.event-row,
+.job-row,
+.side-card span,
+.info-box,
+.preference-item {
+  border-color: rgba(47,191,255,.18) !important;
+}
+
+footer {
+  background: rgba(3,8,32,.92) !important;
+  border-top: 5px solid var(--qe-blue) !important;
+  color: var(--qe-muted) !important;
+}
+
+@media (max-width: 900px) {
+  body::before, body::after { opacity: .45; }
+  .hero { min-height: auto; }
+  .hero h1, .page-hero h1, .register-top h1, .login-hero h1 { font-size: 44px !important; }
+}
