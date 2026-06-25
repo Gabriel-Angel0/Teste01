@@ -1,9 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
+  loadQuantEconTheme();
   initScrollAnimations();
   initSmoothScroll();
   initCadastroDestino();
   initPosCadastro();
 });
+
+function loadQuantEconTheme() {
+  if (document.querySelector('link[data-quantecon-theme]')) return;
+
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = getAssetPrefix() + 'assets/css/quantecon-theme.css?v=1';
+  link.dataset.quanteconTheme = 'true';
+  document.head.appendChild(link);
+}
+
+function getAssetPrefix() {
+  const path = window.location.pathname;
+  return path.includes('/pages/') ? '../' : '';
+}
 
 function initScrollAnimations() {
   const animatedElements = document.querySelectorAll('.fade-up');
