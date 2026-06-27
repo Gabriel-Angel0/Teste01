@@ -3,7 +3,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  sendEmailVerification,
+  sendEmailVerification as verifyMail,
   signOut
 } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
 import {
@@ -18,6 +18,7 @@ import { firebaseConfig } from './firebase-config.js';
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const STUDENT_DOMAIN = '@estudante.ufjf.br';
 
 const DASHBOARDS = {
   placement: 'dashboard-placement.html',
@@ -64,6 +65,11 @@ async function handleCadastro(event) {
     return;
   }
 
+  if (role === 'placement' && !email.endsWith(STUDENT_DOMAIN)) {
+    setMessage(mensagem, 'O cadastro Placement só aceita e-mail estudantil da UFJF: ' + STUDENT_DOMAIN, 'error');
+    return;
+  }
+
   try {
     const cred = await createUserWithEmailAndPassword(auth, email, senha);
     const uid = cred.user.uid;
@@ -75,13 +81,21 @@ async function handleCadastro(event) {
         nome: profile.nome,
         email,
         role,
-        status: role === 'parceiro' ? 'pendente' : 'ativo',
+        emailVerificado: cred.user.emailVerified,
+        status: role === 'placement' ? 'aguardando_verificacao_email' : role === 'parceiro' ? 'pendente' : 'ativo',
         criadoEm: serverTimestamp(),
         atualizadoEm: serverTimestamp()
       }, { merge: true }),
       setDoc(doc(db, 'profiles', uid), profile, { merge: true }),
       setDoc(doc(db, 'egressos', uid), profile, { merge: true })
     ]);
+
+    if (role === 'placement') {
+      await verifyMail(cred.user);
+      setMessage(mensagem, 'Cadastro criado. Enviamos uma mensagem de confirmação para ' + email + '. Confirme o e-mail antes de acessar a área Placement.', 'success');
+      cadastroForm.reset();
+      return;
+    }
 
     setMessage(mensagem, 'Cadastro realizado com sucesso! Redirecionando...', 'success');
 
@@ -106,7 +120,15 @@ async function handleLogin(event) {
 
   try {
     const cred = await signInWithEmailAndPassword(auth, email, senha);
+    await cred.user.reload();
     const role = await getUserRole(cred.user.uid);
+
+    if (role === 'placement' && !cred.user.emailVerified) {
+      await verifyMail(cred.user).catch(() => null);
+      setMessage(mensagem, 'Seu e-mail estudantil ainda não foi confirmado. Enviamos uma nova mensagem de confirmação. Verifique sua caixa de entrada e spam.', 'error');
+      return;
+    }
+
     window.location.href = dashboardFor(role);
   } catch (error) {
     console.error(error);
@@ -135,6 +157,7 @@ function buildProfile(form, role, uid, email) {
     tipoVinculo: role,
     nome: getValue(form, 'nome'),
     email,
+    emailVerificado: false,
     matricula: getValue(form, 'matricula'),
     curso: getValue(form, 'curso'),
     categoriaAlumni: getValue(form, 'categoriaAlumni'),
@@ -165,7 +188,7 @@ function buildProfile(form, role, uid, email) {
     receberOportunidades: getChecked(form, 'receberOportunidades'),
     participarMentoria: getChecked(form, 'participarMentoria'),
     receberNewsletter: getChecked(form, 'receberNewsletter'),
-    statusVerificacao: 'pendente',
+    statusVerificacao: role === 'placement' ? 'aguardando_verificacao_email' : 'pendente',
     atualizadoEm: serverTimestamp(),
     criadoEm: serverTimestamp()
   };
@@ -234,6 +257,7 @@ function translateFirebaseError(code) {
     'auth/invalid-credential': 'E-mail ou senha inválidos.',
     'auth/user-not-found': 'Usuário não encontrado.',
     'auth/wrong-password': 'Senha incorreta.',
+    'auth/too-many-requests': 'Muitas tentativas. Aguarde um pouco antes de tentar novamente.',
     'permission-denied': 'Permissão negada no Firestore. Verifique as regras do banco de dados.'
   };
 
