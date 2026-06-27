@@ -1,0 +1,62 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return signedIn() && request.auth.uid == userId;
+    }
+
+    function validRole(role) {
+      return role in ['placement', 'alumni', 'parceiro'];
+    }
+
+    match /users/{userId} {
+      allow create: if isOwner(userId)
+        && validRole(request.resource.data.role)
+        && request.resource.data.email == request.auth.token.email;
+      allow read, update: if isOwner(userId);
+      allow delete: if false;
+    }
+
+    match /profiles/{userId} {
+      allow create: if isOwner(userId)
+        && validRole(request.resource.data.role)
+        && request.resource.data.email == request.auth.token.email;
+      allow read, update: if isOwner(userId);
+      allow delete: if false;
+    }
+
+    // Coleção antiga mantida por compatibilidade com o mapa/globo já criado.
+    match /egressos/{userId} {
+      allow create: if isOwner(userId)
+        && validRole(request.resource.data.role)
+        && request.resource.data.email == request.auth.token.email;
+      allow read: if signedIn();
+      allow update: if isOwner(userId);
+      allow delete: if false;
+    }
+
+    match /eventProposals/{proposalId} {
+      allow create: if signedIn()
+        && request.resource.data.ownerUid == request.auth.uid;
+      allow read: if signedIn();
+      allow update, delete: if false;
+    }
+
+    match /opportunities/{opportunityId} {
+      allow create: if signedIn()
+        && request.resource.data.ownerUid == request.auth.uid;
+      allow read: if signedIn();
+      allow update, delete: if false;
+    }
+
+    match /newsletter/{entryId} {
+      allow create: if true;
+      allow read, update, delete: if false;
+    }
+  }
+}
