@@ -3,6 +3,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendEmailVerification,
   signOut
 } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
 import {
@@ -28,8 +29,6 @@ let cadastroForm = document.getElementById('form-cadastro');
 const loginForm = document.getElementById('form-login');
 const logoutButtons = document.querySelectorAll('[data-logout], #btn-logout');
 
-// Remove listeners antigos de protótipo que eram registrados em main.js.
-// Isso garante que o submit seja tratado pelo Firebase abaixo.
 if (cadastroForm) {
   const cleanForm = cadastroForm.cloneNode(true);
   cadastroForm.replaceWith(cleanForm);
