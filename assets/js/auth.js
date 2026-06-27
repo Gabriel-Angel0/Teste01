@@ -3,7 +3,6 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  onAuthStateChanged,
   signOut
 } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
 import {
@@ -25,11 +24,16 @@ const DASHBOARDS = {
   parceiro: 'dashboard-parceiro.html'
 };
 
-const cadastroForm = document.getElementById('form-cadastro');
+let cadastroForm = document.getElementById('form-cadastro');
 const loginForm = document.getElementById('form-login');
 const logoutButtons = document.querySelectorAll('[data-logout], #btn-logout');
 
+// Remove listeners antigos de protótipo que eram registrados em main.js.
+// Isso garante que o submit seja tratado pelo Firebase abaixo.
 if (cadastroForm) {
+  const cleanForm = cadastroForm.cloneNode(true);
+  cadastroForm.replaceWith(cleanForm);
+  cadastroForm = cleanForm;
   cadastroForm.addEventListener('submit', handleCadastro);
 }
 
@@ -162,7 +166,7 @@ function buildProfile(form, role, uid, email) {
     receberOportunidades: getChecked(form, 'receberOportunidades'),
     participarMentoria: getChecked(form, 'participarMentoria'),
     receberNewsletter: getChecked(form, 'receberNewsletter'),
-    statusVerificacao: role === 'parceiro' ? 'pendente' : 'pendente',
+    statusVerificacao: 'pendente',
     atualizadoEm: serverTimestamp(),
     criadoEm: serverTimestamp()
   };
@@ -218,11 +222,7 @@ function getChecked(form, name) {
 function setMessage(element, text, type = 'info') {
   if (!element) return;
   element.textContent = text;
-  const colors = {
-    info: '#bfdbfe',
-    success: '#86efac',
-    error: '#fecaca'
-  };
+  const colors = { info: '#bfdbfe', success: '#86efac', error: '#fecaca' };
   element.style.color = colors[type] || colors.info;
 }
 
